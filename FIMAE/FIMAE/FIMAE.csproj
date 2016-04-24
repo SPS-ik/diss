@@ -36,6 +36,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +55,53 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="FIMAS\DefiningFeatures\DefiningFeatureValue.cs" />
+    <Compile Include="FIMAS\DefiningFeatures\StepwiseFeaturesModel.cs" />
+    <Compile Include="FIMAS\AgentOrientedSubsystem.cs" />
+    <Compile Include="FIMAS\Fimas.cs" />
+    <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseController.cs" />
+    <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseExpression.cs" />
+    <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseRule.cs" />
+    <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseTerm.cs" />
+    <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseVariable.cs" />
+    <Compile Include="Helpers\VisualManagerStateHelper.cs" />
+    <Compile Include="MainVindowViewModel.cs" />
+    <Compile Include="Models\FimasModel.cs" />
+    <Compile Include="ViewModels\AOSContainerViewModel.cs" />
+    <Compile Include="ViewModels\AOSViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ISideMenuViewModel.cs" />
+    <Compile Include="ViewModels\SideMenu\SideMenuConstructorViewModel.cs" />
+    <Compile Include="ViewModels\SideMenu\SideMenuContainerViewModel.cs" />
+    <Compile Include="ViewModels\SideMenu\SideMenuProcessingViewModel.cs" />
+    <Compile Include="ViewModels\SideMenu\SideMenuStartViewModel.cs" />
+    <Compile Include="Views\AOS.xaml.cs">
+      <DependentUpon>AOS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AOSContainer.xaml.cs">
+      <DependentUpon>AOSContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RuleBaseView.xaml.cs">
+      <DependentUpon>RuleBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SideMenu\SideMenuConstructor.xaml.cs">
+      <DependentUpon>SideMenuConstructor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SideMenu\SideMenuContainer.xaml.cs">
+      <DependentUpon>SideMenuContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SideMenu\SideMenuProcessing.xaml.cs">
+      <DependentUpon>SideMenuProcessing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SideMenu\SideMenuStart.xaml.cs">
+      <DependentUpon>SideMenuStart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\FSReader.cs" />
+    <Page Include="DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -61,12 +110,49 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DefiningFeatures\DefiningFeature.cs" />
-    <Compile Include="DefiningFeatures\DefiningFeaturesAgent.cs" />
+    <Compile Include="FIMAS\DefiningFeatures\DefiningFeature.cs" />
+    <Compile Include="FIMAS\DefiningFeatures\DefiningFeaturesAgent.cs" />
+    <Compile Include="FuzzySystem\FuzzyMath.cs" />
+    <Compile Include="FuzzySystem\FuzzyElementBase.cs" />
+    <Compile Include="FuzzySystem\FuzzyController.cs" />
+    <Compile Include="FuzzySystem\Link.cs" />
+    <Compile Include="FuzzySystem\Rules\Expression.cs" />
+    <Compile Include="FuzzySystem\Rules\Rule.cs" />
+    <Compile Include="FuzzySystem\Rules\RuleBase.cs" />
+    <Compile Include="FuzzySystem\Terms.cs" />
+    <Compile Include="FuzzySystem\Variable.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AOS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AOSContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RuleBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SideMenu\SideMenuConstructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SideMenu\SideMenuContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SideMenu\SideMenuProcessing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SideMenu\SideMenuStart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -94,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\RuleBase\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

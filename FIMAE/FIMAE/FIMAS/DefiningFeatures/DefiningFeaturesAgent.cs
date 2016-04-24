@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FIMAE.DefiningFeatures
+namespace FIMAE.FIMAS.DefiningFeatures
 {
     class DefiningFeaturesAgent
     {

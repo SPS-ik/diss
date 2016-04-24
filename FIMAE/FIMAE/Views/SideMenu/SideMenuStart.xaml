@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="FIMAE.Views.SideMenu.SideMenuStart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+	         Height="535" 
+	         Width="240">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="92"/>
+            <RowDefinition Height="92"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="ГІМАС - гнучка інтелектуалізована мультиагентна система" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Margin="24,16,24,8"/>
+        <Button Grid.Row="1"
+                Content="Конструктор ГІМАС"
+                Margin="24,8"
+                Command="{Binding OpenConstructorCommand}"/>
+        
+        <Button Grid.Row="2"
+                Content="Запуск ГІМАС"
+                Margin="24,8"
+                Command="{Binding OpenProcessindCommand}"/>
+
+    </Grid>
+</UserControl>

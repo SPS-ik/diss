@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ViewModels="clr-namespace:FIMAE.ViewModels"
+                    xmlns:Views="clr-namespace:FIMAE.Views"
+                    xmlns:SideMenuVM="clr-namespace:FIMAE.ViewModels.SideMenu"
+                    xmlns:SideMenuV="clr-namespace:FIMAE.Views.SideMenu">
+
+    <DataTemplate DataType="{x:Type SideMenuVM:SideMenuContainerViewModel}">
+        <SideMenuV:SideMenuContainer />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type SideMenuVM:SideMenuStartViewModel}">
+        <SideMenuV:SideMenuStart />
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type SideMenuVM:SideMenuConstructorViewModel}">
+        <SideMenuV:SideMenuConstructor />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type SideMenuVM:SideMenuProcessingViewModel}">
+        <SideMenuV:SideMenuProcessing />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ViewModels:AOSViewModel}">
+        <Views:AOS/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ViewModels:AOSContainerViewModel }">
+        <Views:AOSContainer/>
+    </DataTemplate>
+</ResourceDictionary>

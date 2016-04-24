@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FIMAE.DefiningFeatures
+namespace FIMAE.FIMAS.DefiningFeatures
 {
-    class DefiningFeature
-    {
-        public string Name;
-        public List<string> Values;
+    public class DefiningFeatureValue
+    {        
+        string Value;
     }
 }
