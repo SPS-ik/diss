@@ -26,6 +26,12 @@ namespace FIMAE
             get { return _aosContainer ?? (_aosContainer = new AOSContainerViewModel(_fimas)); }
         }
 
+        private RuleBaseViewModel _ruleBase;
+        public RuleBaseViewModel RuleBase
+        {
+            get { return _ruleBase ?? (_ruleBase = new RuleBaseViewModel(_fimas)); }
+        }
+
         public MainVindowViewModel()
         {
             

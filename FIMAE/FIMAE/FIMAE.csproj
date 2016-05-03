@@ -65,6 +65,7 @@
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseRule.cs" />
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseTerm.cs" />
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseVariable.cs" />
+    <Compile Include="Helpers\RelayCommand .cs" />
     <Compile Include="Helpers\VisualManagerStateHelper.cs" />
     <Compile Include="MainVindowViewModel.cs" />
     <Compile Include="Models\FimasModel.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="ViewModels\AOSViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ISideMenuViewModel.cs" />
+    <Compile Include="ViewModels\RuleBaseViewModel.cs" />
     <Compile Include="ViewModels\SideMenu\SideMenuConstructorViewModel.cs" />
     <Compile Include="ViewModels\SideMenu\SideMenuContainerViewModel.cs" />
     <Compile Include="ViewModels\SideMenu\SideMenuProcessingViewModel.cs" />
@@ -112,15 +114,6 @@
     </Compile>
     <Compile Include="FIMAS\DefiningFeatures\DefiningFeature.cs" />
     <Compile Include="FIMAS\DefiningFeatures\DefiningFeaturesAgent.cs" />
-    <Compile Include="FuzzySystem\FuzzyMath.cs" />
-    <Compile Include="FuzzySystem\FuzzyElementBase.cs" />
-    <Compile Include="FuzzySystem\FuzzyController.cs" />
-    <Compile Include="FuzzySystem\Link.cs" />
-    <Compile Include="FuzzySystem\Rules\Expression.cs" />
-    <Compile Include="FuzzySystem\Rules\Rule.cs" />
-    <Compile Include="FuzzySystem\Rules\RuleBase.cs" />
-    <Compile Include="FuzzySystem\Terms.cs" />
-    <Compile Include="FuzzySystem\Variable.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -183,6 +176,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\RuleBase\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FuzzySystem\FuzzySystem.csproj">
+      <Project>{f6f18823-77e7-41a3-8c7b-0dc7a9c1303d}</Project>
+      <Name>FuzzySystem</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

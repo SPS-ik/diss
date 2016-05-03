@@ -4,8 +4,8 @@ using System.Text;
 using System.Xml;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using FIMAE.FuzzySystem;
-using FIMAE.FuzzySystem.Rules;
+using FuzzySystem;
+using FuzzySystem.Rules;
 
 namespace FIMAE.Helpers
 {

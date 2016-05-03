@@ -26,11 +26,10 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _backCommand ?? (_backCommand = new CommandHandler((o) => Back(o), _canBack));
+                return _backCommand ?? (_backCommand = new CommandHandler((o) => Back(o)));
             }
         }
 
-        private bool _canBack = true;
         public void Back(object o)
         {
             _container.CurrentViewModel = new SideMenuStartViewModel(_container, _fimas);

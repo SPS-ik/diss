@@ -26,11 +26,10 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _openConstructorCommand ?? (_openConstructorCommand = new CommandHandler((o) => OpenConstructor(o), _canOpenConstructor));
+                return _openConstructorCommand ?? (_openConstructorCommand = new CommandHandler((o) => OpenConstructor(o)));
             }
         }
 
-        private bool _canOpenConstructor = true;
         public void OpenConstructor(object o)
         {
             _container.CurrentViewModel = new SideMenuConstructorViewModel(_container, _fimas);
@@ -43,11 +42,10 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _openProcessindCommand ?? (_openProcessindCommand = new CommandHandler((o) => OpenProcessind(o), _canOpenProcessing));
+                return _openProcessindCommand ?? (_openProcessindCommand = new CommandHandler((o) => OpenProcessind(o)));
             }
         }
 
-        private bool _canOpenProcessing = true;
         public void OpenProcessind(object o)
         {
             _container.CurrentViewModel = new SideMenuProcessingViewModel(_container, _fimas);

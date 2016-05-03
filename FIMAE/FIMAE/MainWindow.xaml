@@ -37,8 +37,16 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <ContentControl Content="{Binding AOSContainer}"
-                                Height="349"
-                                Width="520"/>
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
+                                MinHeight="334"
+                                MinWidth="508"/>
+                <ContentControl Content="{Binding RuleBase}"
+                                Grid.Row="1"
+                                HorizontalContentAlignment="Stretch"
+                                VerticalContentAlignment="Stretch"
+                                MinWidth="508"
+                                MinHeight="160"/>
             </Grid>
         </Border>
     </Grid>

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FIMAE.FuzzySystem
+namespace FuzzySystem
 {
 	public delegate double InferenceMethodDelegate(params object[] par);	
 	public delegate double FunctionMethodDelefate(double x);
 
-	class FuzzyMath
+	public class FuzzyMath
 	{
 		public static double Min(params object[] par)
 		{            

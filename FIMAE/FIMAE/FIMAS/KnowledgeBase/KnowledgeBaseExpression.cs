@@ -8,8 +8,8 @@ namespace FIMAE.FIMAS.KnowledgeBase
 {
     public class KnowledgeBaseExpression
     {
-        public KnowledgeBaseVariable Variable;
-        public KnowledgeBaseTerm Term;
+        public KnowledgeBaseVariable Variable { get; set; }
+        public KnowledgeBaseTerm Term { get; set; }
 
         public KnowledgeBaseExpression(KnowledgeBaseVariable v, KnowledgeBaseTerm t)
         {

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FIMAE.FIMAS.DefiningFeatures;
-using FIMAE.FuzzySystem;
 
 namespace FIMAE.FIMAS
 {

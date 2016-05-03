@@ -8,11 +8,12 @@ namespace FIMAE.FIMAS.KnowledgeBase
 {
     public class KnowledgeBaseTerm
     {
-        public string Name;
-        public double A;
-        public double B;
-        public double C;
-        public double D;
+
+        public string Name { get; set; }
+        public double A { get; set; }
+        public double B { get; set; }
+        public double C { get; set; }
+        public double D { get; set; }
 
         public KnowledgeBaseTerm(string name, double a, double b, double c, double d)
         {

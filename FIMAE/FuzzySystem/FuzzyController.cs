@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Text;
 using System.Collections.Generic;
-using FIMAE.FuzzySystem.Rules;
+using FuzzySystem.Rules;
 
-namespace FIMAE.FuzzySystem
+namespace FuzzySystem
 {
     public class FuzzyController
     {

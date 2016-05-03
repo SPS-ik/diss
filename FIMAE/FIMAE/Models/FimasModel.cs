@@ -1,6 +1,5 @@
 ﻿using FIMAE.FIMAS.DefiningFeatures;
 using FIMAE.FIMAS;
-using FIMAE.FuzzySystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +33,11 @@ namespace FIMAE.Models
             }
         }
 
+        public List<KnowledgeBaseVariable> GetLimits()
+        {
+            return _fimas.KnowledgeBaseController.GetValiables();
+        }
+
         public void AddLimit(KnowledgeBaseVariable variable)
         {
             _fimas.KnowledgeBaseController.AddVariable(variable);
@@ -42,6 +46,11 @@ namespace FIMAE.Models
             {
                 OnLimitsChanged();
             }
+        }
+
+        public List<KnowledgeBaseRule> GetRules()
+        {
+            return _fimas.KnowledgeBaseController.GetRules();
         }
 
         public void AddRule(KnowledgeBaseRule rule)

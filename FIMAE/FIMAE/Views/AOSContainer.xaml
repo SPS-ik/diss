@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             Height="349"
-             Width="520">
+             mc:Ignorable="d">
     
     <Grid>
-        <ItemsControl ItemsSource="{Binding AOSViewModelsList}">
+        <ItemsControl ItemsSource="{Binding AOSViewModelsList}"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ItemsControl.ItemContainerStyle>
                 <Style>
                     <Setter Property="FrameworkElement.Margin" Value="16"/>

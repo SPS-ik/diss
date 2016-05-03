@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FIMAE.FIMAS.KnowledgeBase;
-using FIMAE.FuzzySystem;
+using FIMAE.Helpers;
 
 namespace FIMAE.ViewModels.SideMenu
 {
@@ -32,6 +32,8 @@ namespace FIMAE.ViewModels.SideMenu
             _fimas = fimas;
             _container = container;
             NewPropertyValues = new ObservableCollection<string>();
+            NewLimitTerms = new ObservableCollection<KnowledgeBaseTerm>();
+            AddedInputExpressions = new ObservableCollection<KnowledgeBaseExpression>();
         }
 
         public string CurrentMode
@@ -51,6 +53,9 @@ namespace FIMAE.ViewModels.SideMenu
                         _currentMode = newMode;
                 }
                 OnPropertyChanged("CurrentMode");
+                OnPropertyChanged("PropertiesHeader");
+                OnPropertyChanged("LimitsHeader");
+                OnPropertyChanged("RulesHeader");                
             }
         }
         
@@ -60,7 +65,7 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _changeModeCommand ?? (_changeModeCommand = new CommandHandler((obj) => { ChangeMode(obj); }, true));
+                return _changeModeCommand ?? (_changeModeCommand = new RelayCommand((obj) => { ChangeMode(obj); }));
             }
         }
 
@@ -76,20 +81,46 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _backCommand ?? (_backCommand = new CommandHandler((o) => Back(o), _canBack));
+                return _backCommand ?? (_backCommand = new RelayCommand((o) => Back(o)));
             }
         }
 
-        private bool _canBack = true;
         public void Back(object o)
         {
             _container.CurrentViewModel = new SideMenuStartViewModel(_container, _fimas);
         }
 
+        
+        #region Properties
+        public string PropertiesHeader
+        {
+            get
+            {
+                return String.Format("{0} Додати ознаку", _currentMode == FimaeConstructorModes.PropertiesState ? @"/\" : @"\/");
+            }
+        }
 
+        private string _newPropertyName;
+        public string NewPropertyName 
+        {
+            get {return _newPropertyName;}
+            set
+            {
+                _newPropertyName = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
 
-        public string NewPropertyName { get; set; }
-        public string NewPropertyValue { get; set; }
+        private string _newPropertyValue;
+        public string NewPropertyValue
+        {
+            get { return _newPropertyValue; }
+            set
+            {
+                _newPropertyValue = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
         public ObservableCollection<string> NewPropertyValues { get; set; }
 
         private ICommand _addPropertyValueCommand;
@@ -97,7 +128,15 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _addPropertyValueCommand ?? (_addPropertyValueCommand = new CommandHandler((obj) => { AddPropertyValue(obj); }, true));
+                return _addPropertyValueCommand ?? (_addPropertyValueCommand = new RelayCommand(
+                    (obj) => 
+                    { 
+                        AddPropertyValue(obj);
+                    },
+                    o =>
+                    { 
+                        return !String.IsNullOrEmpty(NewPropertyValue);
+                    }));
             }
         }
 
@@ -115,7 +154,15 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _addPropertyCommand ?? (_addPropertyCommand = new CommandHandler((obj) => { AddProperty(obj); }, true));
+                return _addPropertyCommand ?? (_addPropertyCommand = new RelayCommand(
+                    (obj) =>
+                    {
+                        AddProperty(obj);
+                    },
+                    o =>
+                    {
+                        return !String.IsNullOrEmpty(NewPropertyName) && NewPropertyValues.Count > 0;
+                    }));
             }
         }
 
@@ -133,11 +180,121 @@ namespace FIMAE.ViewModels.SideMenu
             OnPropertyChanged("NewPropertyValue");
             NewPropertyValues.Clear();
         }
+        #endregion
 
+        #region Limits
+        public string LimitsHeader
+        {
+            get
+            {
+                return String.Format("{0} Додати обмеження", _currentMode == FimaeConstructorModes.LimitsState ? @"/\" : @"\/");
+            }
+        }
 
-        public string NewLimitName { get; set; }
-        public string NewLimitTermName { get; set; }
-        public ObservableCollection<string> NewLimitTermNames { get; set; }
+        private string _newLimitName;
+        public string NewLimitName
+        {
+            get { return _newLimitName; }
+            set 
+            {
+                _newLimitName = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        private string _newLimitTermName;
+        public string NewLimitTermName
+        {
+            get { return _newLimitTermName; }
+            set
+            {
+                _newLimitTermName = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        private double _a;
+        public double A
+        {
+            get { return _a; }
+            set
+            {
+                _a = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        private double _b;
+        public double B
+        {
+            get { return _b; }
+            set
+            {
+                _b = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        private double _c;
+        public double C
+        {
+            get { return _c; }
+            set
+            {
+                _c = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        private double _d;
+        public double D
+        {
+            get { return _d; }
+            set
+            {
+                _d = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        public ObservableCollection<KnowledgeBaseTerm> NewLimitTerms { get; set; }        
+
+        // AddLimitTermCommand
+        private ICommand _addLimitTermCommand;
+        public ICommand AddLimitTermCommand
+        {
+            get
+            {
+                return _addLimitTermCommand ?? (_addLimitTermCommand = new RelayCommand(
+                    (obj) =>
+                    {
+                        AddLimitTerm(obj);
+                    },
+                    o =>
+                    {
+                        return !String.IsNullOrEmpty(NewLimitTermName);
+                    }));
+            }
+        }
+
+        public void AddLimitTerm(object o)
+        {
+            var newLimitTerm = new KnowledgeBaseTerm(NewLimitTermName, A, B, C, D);
+
+            NewLimitTerms.Add(newLimitTerm);
+            OnPropertyChanged("NewLimitTerms");
+
+            NewLimitTermName = "";
+            OnPropertyChanged("NewLimitTermName");
+            A = 0;
+            OnPropertyChanged("A");
+            B = 0;
+            OnPropertyChanged("B");
+            C = 0;
+            OnPropertyChanged("C");
+            D = 0;
+            OnPropertyChanged("D");
+        }
 
         // AddLimitCommand
         private ICommand _addLimitCommand;
@@ -145,7 +302,16 @@ namespace FIMAE.ViewModels.SideMenu
         {
             get
             {
-                return _addLimitCommand ?? (_addLimitCommand = new CommandHandler((obj) => { AddLimit(obj); }, true));
+                return _addLimitCommand ?? (_addLimitCommand = new RelayCommand(
+                    (obj) =>
+                    {
+                        AddLimit(obj);
+                    },
+                    o =>
+                    {
+                        return !String.IsNullOrEmpty(NewLimitName) && NewLimitTerms.Count > 0;
+                    }
+                    ));
             }
         }
 
@@ -153,19 +319,285 @@ namespace FIMAE.ViewModels.SideMenu
         {
             var newVariable = new KnowledgeBaseVariable();
             newVariable.Name = NewLimitName;
-            foreach (var term in NewLimitTermNames)
+            foreach (var term in NewLimitTerms)
             {
-                newVariable.Terms.Add(new KnowledgeBaseTerm(term,0,0,0,0));
+                newVariable.Terms.Add(term);
             }
 
             _fimas.AddLimit(newVariable);
 
-            NewPropertyName = "";
-            OnPropertyChanged("NewPropertyName");
-            NewPropertyValue = "";
-            OnPropertyChanged("NewPropertyValue");
-            NewPropertyValues.Clear();
+            NewLimitName = "";
+            OnPropertyChanged("NewLimitName");
+
+            NewLimitTermName = "";
+            OnPropertyChanged("NewLimitTermName");
+
+            NewLimitTerms.Clear();
+            OnPropertyChanged("NewLimitTerms");
+
+            OnPropertyChanged("AccessibleInVars");
+            OnPropertyChanged("AccessibleOutVars");
+        }
+        #endregion
+        
+        #region Rules
+        public string RulesHeader
+        {
+            get
+            {
+                return String.Format("{0} Додати правило", _currentMode == FimaeConstructorModes.RulesState ? @"/\" : @"\/");
+            }
+        }
+        public ObservableCollection<KnowledgeBaseVariable> AccessibleInVars 
+        {
+            get 
+            {
+                var limits = new ObservableCollection<KnowledgeBaseVariable>(_fimas.GetLimits());
+
+                ObservableCollection<KnowledgeBaseVariable> result = new ObservableCollection<KnowledgeBaseVariable>();
+                foreach(var limit in limits)
+                {
+                    var isAccessible = true;
+                    foreach(var inExpr in AddedInputExpressions)
+                    {
+                        if (inExpr.Variable.Name == limit.Name)
+                        {
+                            isAccessible = false;
+                        }
+                    }
+                    if ((SelectedOutputVar != null) && (SelectedOutputVar.Name == limit.Name))
+                    {
+                        isAccessible = false;
+                    }
+
+                    if(isAccessible)
+                    {
+                        result.Add(limit);
+                    }
+                }
+                
+                return result;
+            }
+            set {}
+        }
+        
+        // input
+        public ObservableCollection<KnowledgeBaseExpression> AddedInputExpressions { get; set; }
+
+        private KnowledgeBaseVariable _selectedInputVar;
+        public KnowledgeBaseVariable SelectedInputVar
+        { 
+            get {return _selectedInputVar;}
+            set
+            {
+                _selectedInputVar = value;
+                OnPropertyChanged("AccessibleInputTerms");
+                OnPropertyChanged("SelectedInputVar");
+
+                if (SelectedOutputVar != null)
+                {
+                    _selectedOutputVar = null;
+                    OnPropertyChanged("SelectedOutputVar");
+                    _selectedOutputTerm = null;
+                    OnPropertyChanged("SelectedOutputTerm");
+                    AccessibleOutputTerms.Clear();
+                    OnPropertyChanged("AccessibleOutputTerms");
+                }
+       
+                RelayCommand.UpdateCanExecute();
+            }
         }
 
+        public ObservableCollection<KnowledgeBaseTerm> AccessibleInputTerms
+        {
+            get
+            {
+                var terms = new ObservableCollection<KnowledgeBaseTerm>();
+                if (SelectedInputVar != null && SelectedInputVar.Terms != null)
+                {
+                    SelectedInputVar.Terms.ForEach(terms.Add);
+                }
+                return terms;
+            }
+            set { }
+        }
+
+        private KnowledgeBaseTerm _selectedInputTerm;
+        public KnowledgeBaseTerm SelectedInputTerm
+        {
+            get { return _selectedInputTerm; }
+            set
+            {
+                _selectedInputTerm = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        // output
+        public ObservableCollection<KnowledgeBaseVariable> AccessibleOutVars
+        {
+            get
+            {
+                var limits = new ObservableCollection<KnowledgeBaseVariable>(_fimas.GetLimits());
+
+                ObservableCollection<KnowledgeBaseVariable> result = new ObservableCollection<KnowledgeBaseVariable>();
+                foreach (var limit in limits)
+                {
+                    var isAccessible = true;
+                    foreach (var inExpr in AddedInputExpressions)
+                    {
+                        if (inExpr.Variable.Name == limit.Name)
+                        {
+                            isAccessible = false;
+                        }
+                    }
+                    if ((SelectedInputVar != null) && (SelectedInputVar.Name == limit.Name))
+                    {
+                        isAccessible = false;
+                    }
+
+                    if (isAccessible)
+                    {
+                        result.Add(limit);
+                    }
+                }
+
+                return result;
+            }
+            set { }
+        }
+
+        private KnowledgeBaseVariable _selectedOutputVar;
+        public KnowledgeBaseVariable SelectedOutputVar
+        {
+            get { return _selectedOutputVar; }
+            set
+            {
+
+                _selectedOutputVar = value;
+                OnPropertyChanged("AccessibleOutputTerms");
+                OnPropertyChanged("SelectedOutputVar");
+
+                if (SelectedInputVar != null)
+                {
+                    _selectedInputVar = null;
+                    OnPropertyChanged("SelectedInputVar");
+                    _selectedInputTerm = null;
+                    OnPropertyChanged("SelectedInputTerm");
+                    AccessibleInputTerms.Clear();
+                    OnPropertyChanged("AccessibleInputTerms");
+                }
+
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+        public ObservableCollection<KnowledgeBaseTerm> AccessibleOutputTerms
+        {
+            get
+            {
+                var terms = new ObservableCollection<KnowledgeBaseTerm>();
+                if (SelectedOutputVar != null && SelectedOutputVar.Terms != null)
+                {
+                    SelectedOutputVar.Terms.ForEach(terms.Add);
+                }
+                return terms;
+            }
+            set { }
+        }
+
+        private KnowledgeBaseTerm _selectedOutputTerm;
+        public KnowledgeBaseTerm SelectedOutputTerm
+        {
+            get { return _selectedOutputTerm; }
+            set
+            {
+                _selectedOutputTerm = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
+
+        // AddInputExpressionCommand
+        private ICommand _addInputExpressionCommand;
+        public ICommand AddInputExpressionCommand
+        {
+            get
+            {
+                return _addInputExpressionCommand ?? (_addInputExpressionCommand = new RelayCommand(
+                    (obj) =>
+                    {
+                        AddInputExpression(obj);
+                    },
+                    o =>
+                    {
+                        return SelectedInputVar != null && SelectedInputTerm != null;
+                    }));
+            }
+        }
+
+        public void AddInputExpression(object o)
+        {
+            AddedInputExpressions.Add(new KnowledgeBaseExpression(SelectedInputVar, SelectedInputTerm));
+
+            SelectedInputVar = null;
+            OnPropertyChanged("SelectedInputVar");
+
+            SelectedInputTerm = null;
+            OnPropertyChanged("SelectedInputTerm");
+
+            OnPropertyChanged("AccessibleInVars");
+            OnPropertyChanged("AccessibleOutVars");    
+        }
+
+
+
+        // AddRuleCommand
+        private ICommand _addRuleCommand;
+        public ICommand AddRuleCommand
+        {
+            get
+            {
+                return _addRuleCommand ?? (_addRuleCommand = new RelayCommand(
+                    (obj) =>
+                    {
+                        AddRule(obj);
+                    },
+                    o =>
+                    {
+                        return AddedInputExpressions.Count >0 && SelectedOutputVar != null && SelectedOutputTerm != null;
+                    }));
+            }
+        }
+
+        public void AddRule(object o)
+        {
+            var rule = new KnowledgeBaseRule()
+            {
+                Conditions = AddedInputExpressions.ToList(),
+                Result = new KnowledgeBaseExpression(SelectedOutputVar, SelectedOutputTerm)
+            };
+            _fimas.AddRule(rule);
+
+            AddedInputExpressions.Clear();
+            OnPropertyChanged("AddedInputExpressions");
+
+            SelectedInputVar = null;
+            OnPropertyChanged("SelectedInputVar");
+
+            SelectedInputTerm = null;
+            OnPropertyChanged("SelectedInputTerm");
+
+            SelectedOutputVar = null;
+            OnPropertyChanged("SelectedOutputVar");
+
+            SelectedOutputTerm = null;
+            OnPropertyChanged("SelectedOutputTerm");
+
+            OnPropertyChanged("AccessibleInVars");
+            OnPropertyChanged("AccessibleOutVars");     
+        }
+
+        #endregion
     }
 }

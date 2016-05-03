@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FIMAE.FuzzySystem
+namespace FuzzySystem
 {
     public class Link
     {

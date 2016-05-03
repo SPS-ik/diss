@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 
-namespace FIMAE.FuzzySystem
+namespace FuzzySystem
 {
     public enum DefuzzyficationMethod
     {

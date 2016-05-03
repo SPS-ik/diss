@@ -69,47 +69,50 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Button Content="&lt;"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                FontSize="18"
-                Margin="24,16,24,0"
-                Width="24"
-                Command="{Binding BackCommand}"/>
-        <TextBlock Text="Конструктор ГІМАС" 
-                   TextWrapping="Wrap" 
-                   HorizontalAlignment="Right" 
-                   VerticalAlignment="Top" 
-                   FontSize="18" 
-                   Margin="24,16,24,0"/>
-        
-        <Grid Grid.Row="1"
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Margin="16,16">
+            <Button Content="&lt;"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="18"
+                    Width="24"
+                    Command="{Binding BackCommand}"/>
+            <TextBlock Text="Конструктор ГІМАС"
+                       HorizontalAlignment="Right" 
+                       VerticalAlignment="Top" 
+                       Margin="12,0,0,0"
+                       FontSize="18" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"
               Margin="0,12"
-              HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Button Content="L"
-                    Width="24"
+              Orientation="Horizontal"
+              HorizontalAlignment="Center"
+              Visibility="Collapsed">
+            <Button Content="Відкрити"
+                    Width="64"
                     Height="24"
-                    Margin="6,0"/>
-            <Button Content="S"
+                    Margin="6,0"
+                    IsEnabled="False"/>
+            <Button Content="Зберегти"
                     Grid.Column="1"                    
-                    Width="24"
+                    Width="64"
                     Height="24"
-                    Margin="6,0"/>
-        </Grid>
+                    Margin="6,0"
+                    IsEnabled="False"/>
+        </StackPanel>
 
         <StackPanel Grid.Row="2"
                     Orientation="Vertical">
 
-            <Button Content="\/ Додати ознаку"
+            <Button Content="{Binding PropertiesHeader}"
                 HorizontalContentAlignment="Left"
                 Padding="16,0"
                 Margin="4, 0"
@@ -123,17 +126,18 @@
 
                 <TextBlock Text="Назва"
                        Margin="24,8,24,4"/>
-                <TextBox Text="{Binding NewPropertyName}"
+                <TextBox Text="{Binding NewPropertyName, UpdateSourceTrigger=PropertyChanged}"
                      Margin="24,4"/>
 
                 <TextBlock Text="Список значень"
                        Margin="24,8,24,4"/>
                 <ListBox Margin="24,4,24,6"
                      MinHeight="96"
+                     MaxHeight="96"
                      ItemsSource="{Binding Path=NewPropertyValues, UpdateSourceTrigger=PropertyChanged}"/>
                 <StackPanel Orientation="Horizontal"
                         Margin="24,6,24,0">
-                    <TextBox Text="{Binding NewPropertyValue}"
+                    <TextBox Text="{Binding NewPropertyValue, UpdateSourceTrigger=PropertyChanged}"
                          Width="156"
                          Margin="0,0,12,0"/>
                     <Button HorizontalAlignment="Right"
@@ -156,7 +160,7 @@
         <StackPanel Grid.Row="3"
                     Orientation="Vertical">
 
-            <Button Content="\/ Додати обмеження"
+            <Button Content="{Binding LimitsHeader}"
                 HorizontalContentAlignment="Left"
                 Padding="16,0"
                 Margin="4, 0"
@@ -170,38 +174,71 @@
 
                 <TextBlock Text="Назва"
                        Margin="24,8,24,4"/>
-                <TextBox Text=""
+                <TextBox Text="{Binding NewLimitName, UpdateSourceTrigger=PropertyChanged}"
                      Margin="24,4"/>
 
                 <TextBlock Text="Список значень"
                        Margin="24,8,24,4"/>
                 <ListBox Margin="24,4,24,6"
                      MinHeight="96"
-                     ItemsSource="{Binding FeatureValue}"/>
+                     MaxHeight="96"
+                     ItemsSource="{Binding Path=NewLimitTerms, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
                 <StackPanel Orientation="Horizontal"
-                        Margin="24,6,24,0">
-                    <TextBox Text=""
-                         Width="156"
-                         Margin="0,0,12,0"/>
+                            Margin="24,6,24,0">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Text="{Binding NewLimitTermName, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="156"
+                                 Margin="0,0,12,0"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,8,0,0">
+                            <TextBlock Text="A"
+                                       Margin="2,0,0,0"/>
+                            <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged}"
+                             Width="24"
+                             Margin="4,0"/>
+                            <TextBlock Text="B"/>
+                            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged}"
+                             Width="24"
+                             Margin="4,0"/>
+                            <TextBlock Text="C"/>
+                            <TextBox Text="{Binding C, UpdateSourceTrigger=PropertyChanged}"
+                             Width="24"
+                             Margin="4,0"/>
+                            <TextBlock Text="D"/>
+                            <TextBox Text="{Binding D, UpdateSourceTrigger=PropertyChanged}"
+                             Width="24"
+                             Margin="4,0"/>
+                        </StackPanel>
+                    </StackPanel>
                     <Button HorizontalAlignment="Right"
                         Width="24"
                         Height="24"
-                        Content="+"/>
+                        Content="+"
+                        Command="{Binding AddLimitTermCommand}"/>
                 </StackPanel>
+
 
                 <Button HorizontalAlignment="Center"
                     Margin="24,12"
                     Height="48"
                     Width="192"
                     Padding="16,0"
-                    Content="Додати"/>
+                    Content="Додати"
+                    Command="{Binding AddLimitCommand}"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="4"
                     Orientation="Vertical">
-            
-            <Button Content="\/ Додати правило"
+
+            <Button Content="{Binding RulesHeader}"
                 HorizontalContentAlignment="Left"
                 Padding="16,0"
                 Margin="4, 0"
@@ -217,31 +254,54 @@
                        Margin="24,8,24,4"/>
                 <ListBox Margin="24,4,24,6"
                      MinHeight="36"
-                     ItemsSource="{Binding FeatureValue}"/>
+                     MaxHeight="36"
+                     ItemsSource="{Binding AddedInputExpressions, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=Variable.Name}"/>
+                                <TextBlock Text="="
+                                           Margin="8,0,0,0"/>
+                                <TextBlock Text="{Binding Path=Term.Name}"
+                                           Margin="8,0,0,0"
+                                           FontStyle="Italic"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>                    
+                </ListBox>
                 <StackPanel Orientation="Horizontal"
                         Margin="24,6,24,0">
                     <StackPanel>
-                        <ComboBox Text=""
-                         Width="156"
-                         Margin="0,0,12,6"/>
-                        <ComboBox Text=""
-                         Width="156"
-                         Margin="0,6,12,0"/>
+                        <ComboBox ItemsSource="{Binding AccessibleInVars, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue ="{Binding SelectedInputVar}"
+                                  Width="156"
+                                  Margin="0,0,12,6"/>
+                        <ComboBox ItemsSource="{Binding AccessibleInputTerms, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue ="{Binding SelectedInputTerm}"
+                                  Width="156"
+                                  Margin="0,6,12,0"/>
                     </StackPanel>
                     <Button HorizontalAlignment="Right"
                         Width="24"
                         Height="24"
-                        Content="+"/>
+                        Content="+"
+                        Command="{Binding AddInputExpressionCommand}"/>
                 </StackPanel>
 
 
                 <TextBlock Text="Вихідна змінна"
                        Margin="24,8,24,4"/>
 
-                <ComboBox Text=""
-                      Margin="24,4,24,6"/>
-                <ComboBox Text=""
-                      Margin="24,4,24,6"/>
+                <ComboBox ItemsSource="{Binding AccessibleOutVars, UpdateSourceTrigger=PropertyChanged}"
+                          DisplayMemberPath="Name"
+                          SelectedValue ="{Binding SelectedOutputVar}"
+                          Margin="24,4,24,6"/>
+                <ComboBox ItemsSource="{Binding AccessibleOutputTerms, UpdateSourceTrigger=PropertyChanged}"
+                          DisplayMemberPath="Name"
+                          SelectedValue ="{Binding SelectedOutputTerm}"
+                          Margin="24,4,24,6"/>
 
 
                 <Button HorizontalAlignment="Center"
@@ -249,7 +309,8 @@
                     Height="48"
                     Width="192"
                     Padding="16,0"
-                    Content="Додати"/>
+                    Content="Додати"
+                    Command="{Binding AddRuleCommand}"/>
             </StackPanel>
         </StackPanel>
 
