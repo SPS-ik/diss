@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FIMAE.FIMAS.KnowledgeBase;
 using FIMAE.Helpers;
+using FIMAE.FIMAS.Limits;
+using System.Windows.Forms;
 
 namespace FIMAE.ViewModels.SideMenu
 {
@@ -26,13 +28,14 @@ namespace FIMAE.ViewModels.SideMenu
         private FimasModel _fimas;
         private SideMenuContainerViewModel _container;
         private FimaeConstructorModes _currentMode;
+        private Serializer saver = new Serializer();
 
         public SideMenuConstructorViewModel(SideMenuContainerViewModel container, FimasModel fimas)
         {
             _fimas = fimas;
             _container = container;
             NewPropertyValues = new ObservableCollection<string>();
-            NewLimitTerms = new ObservableCollection<KnowledgeBaseTerm>();
+            NewLimitTerms = new ObservableCollection<string>();
             AddedInputExpressions = new ObservableCollection<KnowledgeBaseExpression>();
         }
 
@@ -58,6 +61,8 @@ namespace FIMAE.ViewModels.SideMenu
                 OnPropertyChanged("RulesHeader");                
             }
         }
+
+
         
         // ChangeModeCommand
         private ICommand _changeModeCommand;
@@ -73,7 +78,53 @@ namespace FIMAE.ViewModels.SideMenu
         {
             CurrentMode = (string)o;
         }
-        
+
+        // SaveCommand
+        private ICommand _saveCommand;
+        public ICommand SaveCommand
+        {
+            get
+            {
+                return _saveCommand ?? (_saveCommand = new RelayCommand((o) => Save(o)));
+            }
+        }
+
+        public void Save(object o)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                saver.Save(_fimas.GetAosList(), saveFileDialog.FileName);
+            }
+        }
+
+        // OpenCommand
+        private ICommand _openCommand;
+        public ICommand OpenCommand
+        {
+            get
+            {
+                return _openCommand ?? (_openCommand = new RelayCommand((o) => Open(o)));
+            }
+        }
+
+        public void Open(object o)
+        {
+            List<AgentOrientedSubsystem> restoredAosList;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                restoredAosList = saver.Restore(openFileDialog.FileName);
+                _fimas.GetAosList().Clear();
+                foreach (var aos in restoredAosList)
+                {
+                    _fimas.AddDefiningFeature(aos.CurrentFeature);
+                }
+            }
+        }
+
 
         // BackCommand
         private ICommand _backCommand;
@@ -257,7 +308,7 @@ namespace FIMAE.ViewModels.SideMenu
             }
         }
 
-        public ObservableCollection<KnowledgeBaseTerm> NewLimitTerms { get; set; }        
+        public ObservableCollection<string> NewLimitTerms { get; set; }        
 
         // AddLimitTermCommand
         private ICommand _addLimitTermCommand;
@@ -279,9 +330,7 @@ namespace FIMAE.ViewModels.SideMenu
 
         public void AddLimitTerm(object o)
         {
-            var newLimitTerm = new KnowledgeBaseTerm(NewLimitTermName, A, B, C, D);
-
-            NewLimitTerms.Add(newLimitTerm);
+            NewLimitTerms.Add(NewLimitTermName);
             OnPropertyChanged("NewLimitTerms");
 
             NewLimitTermName = "";
@@ -317,11 +366,11 @@ namespace FIMAE.ViewModels.SideMenu
 
         public void AddLimit(object o)
         {
-            var newVariable = new KnowledgeBaseVariable();
+            var newVariable = new Limit();
             newVariable.Name = NewLimitName;
-            foreach (var term in NewLimitTerms)
+            foreach (var value in NewLimitTerms)
             {
-                newVariable.Terms.Add(term);
+                newVariable.Values.Add(value);
             }
 
             _fimas.AddLimit(newVariable);
@@ -348,13 +397,13 @@ namespace FIMAE.ViewModels.SideMenu
                 return String.Format("{0} Додати правило", _currentMode == FimaeConstructorModes.RulesState ? @"/\" : @"\/");
             }
         }
-        public ObservableCollection<KnowledgeBaseVariable> AccessibleInVars 
+        public ObservableCollection<Limit> AccessibleInVars 
         {
             get 
             {
-                var limits = new ObservableCollection<KnowledgeBaseVariable>(_fimas.GetLimits());
+                var limits = new ObservableCollection<Limit>(_fimas.GetLimits());
 
-                ObservableCollection<KnowledgeBaseVariable> result = new ObservableCollection<KnowledgeBaseVariable>();
+                ObservableCollection<Limit> result = new ObservableCollection<Limit>();
                 foreach(var limit in limits)
                 {
                     var isAccessible = true;
@@ -434,13 +483,13 @@ namespace FIMAE.ViewModels.SideMenu
         }
 
         // output
-        public ObservableCollection<KnowledgeBaseVariable> AccessibleOutVars
+        public ObservableCollection<Limit> AccessibleOutVars
         {
             get
             {
-                var limits = new ObservableCollection<KnowledgeBaseVariable>(_fimas.GetLimits());
+                var limits = new ObservableCollection<Limit>(_fimas.GetLimits());
 
-                ObservableCollection<KnowledgeBaseVariable> result = new ObservableCollection<KnowledgeBaseVariable>();
+                ObservableCollection<Limit> result = new ObservableCollection<Limit>();
                 foreach (var limit in limits)
                 {
                     var isAccessible = true;
@@ -577,7 +626,7 @@ namespace FIMAE.ViewModels.SideMenu
                 Conditions = AddedInputExpressions.ToList(),
                 Result = new KnowledgeBaseExpression(SelectedOutputVar, SelectedOutputTerm)
             };
-            _fimas.AddRule(rule);
+            //_fimas.AddRule(rule);
 
             AddedInputExpressions.Clear();
             OnPropertyChanged("AddedInputExpressions");

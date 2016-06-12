@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FIMAE.FIMAS.DefiningFeatures
 {
+    [Serializable]
     public class StepwiseFeaturesModel
     {
         public List<DefiningFeature> DefiningFeaturesList = new List<DefiningFeature>();

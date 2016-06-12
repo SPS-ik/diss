@@ -41,7 +41,7 @@
                                 VerticalContentAlignment="Stretch"
                                 MinHeight="334"
                                 MinWidth="508"/>
-                <ContentControl Content="{Binding RuleBase}"
+                <ContentControl Content="{Binding ExpertTablesContainer}"
                                 Grid.Row="1"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Stretch"

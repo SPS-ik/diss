@@ -33,4 +33,12 @@
         <Views:RuleBaseView/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type ViewModels:ExpertTablesContainerViewModel }">
+        <Views:ExpertTablesContainerView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ViewModels:ExpertTableViewModel }">
+        <Views:ExpertTableView/>
+    </DataTemplate>
+
 </ResourceDictionary>

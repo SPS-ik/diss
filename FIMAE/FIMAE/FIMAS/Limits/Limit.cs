@@ -5,19 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FIMAE.FIMAS.DefiningFeatures
+namespace FIMAE.FIMAS.Limits
 {
-    [Serializable]
-    public class DefiningFeature : IExpertVariable
+    public class Limit : IExpertVariable
     {
         public string Name { get; set; }
         public List<string> Values { get; set; }
 
-        public DefiningFeature()
+        public Limit()
         {
+            Values = new List<string>();
         }
 
-        public DefiningFeature(string name, List<string> values)
+        public Limit(string name, List<string> values)
         {
             Name = name;
             Values = values;

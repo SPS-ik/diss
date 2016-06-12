@@ -92,21 +92,20 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1"
-              Margin="0,12"
+              Margin="0,0,0,12"
               Orientation="Horizontal"
-              HorizontalAlignment="Center"
-              Visibility="Collapsed">
+              HorizontalAlignment="Center">
             <Button Content="Відкрити"
                     Width="64"
                     Height="24"
                     Margin="6,0"
-                    IsEnabled="False"/>
+                    Command="{Binding OpenCommand}"/>
             <Button Content="Зберегти"
                     Grid.Column="1"                    
                     Width="64"
                     Height="24"
                     Margin="6,0"
-                    IsEnabled="False"/>
+                    Command="{Binding SaveCommand}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
@@ -183,11 +182,6 @@
                      MinHeight="96"
                      MaxHeight="96"
                      ItemsSource="{Binding Path=NewLimitTerms, UpdateSourceTrigger=PropertyChanged}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
                 </ListBox>
 
                 <StackPanel Orientation="Horizontal"
@@ -236,7 +230,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="4"
-                    Orientation="Vertical">
+                    Orientation="Vertical"
+                    Visibility="Collapsed">
 
             <Button Content="{Binding RulesHeader}"
                 HorizontalContentAlignment="Left"

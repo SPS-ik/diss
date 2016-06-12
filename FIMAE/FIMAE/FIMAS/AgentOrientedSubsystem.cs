@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FIMAE.FIMAS.DefiningFeatures;
+using FIMAE.Helpers;
 
 namespace FIMAE.FIMAS
 {
+    [Serializable]
     public class AgentOrientedSubsystem
     {
         DefiningFeature _currentFeature;
-        StepwiseFeaturesModel _featuresModel;
-        KnowledgeBaseController _knowledgeBaseController;
+        //StepwiseFeaturesModel _featuresModel;
+        //KnowledgeBaseController _knowledgeBaseController;
 
         public AgentOrientedSubsystem(DefiningFeature currentFeature)//, StepwiseFeaturesModel featuresModel, FuzzyController knowledgeBaseController)
         {

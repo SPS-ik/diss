@@ -32,6 +32,12 @@ namespace FIMAE
             get { return _ruleBase ?? (_ruleBase = new RuleBaseViewModel(_fimas)); }
         }
 
+        private ExpertTablesContainerViewModel _expertTablesContainer;
+        public ExpertTablesContainerViewModel ExpertTablesContainer
+        {
+            get { return _expertTablesContainer ?? (_expertTablesContainer = new ExpertTablesContainerViewModel(_fimas)); }
+        }
+
         public MainVindowViewModel()
         {
             

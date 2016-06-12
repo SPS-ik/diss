@@ -59,19 +59,27 @@
     <Compile Include="FIMAS\DefiningFeatures\DefiningFeatureValue.cs" />
     <Compile Include="FIMAS\DefiningFeatures\StepwiseFeaturesModel.cs" />
     <Compile Include="FIMAS\AgentOrientedSubsystem.cs" />
+    <Compile Include="FIMAS\ExpertSystem\ExpertExpression.cs" />
+    <Compile Include="FIMAS\ExpertSystem\ExpertSystemController.cs" />
+    <Compile Include="FIMAS\ExpertSystem\ExpertSystemTable.cs" />
+    <Compile Include="FIMAS\ExpertSystem\IExpertVariable.cs" />
     <Compile Include="FIMAS\Fimas.cs" />
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseController.cs" />
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseExpression.cs" />
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseRule.cs" />
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseTerm.cs" />
     <Compile Include="FIMAS\KnowledgeBase\KnowledgeBaseVariable.cs" />
+    <Compile Include="FIMAS\Limits\Limit.cs" />
     <Compile Include="Helpers\RelayCommand .cs" />
+    <Compile Include="Helpers\Serializer.cs" />
     <Compile Include="Helpers\VisualManagerStateHelper.cs" />
     <Compile Include="MainVindowViewModel.cs" />
     <Compile Include="Models\FimasModel.cs" />
     <Compile Include="ViewModels\AOSContainerViewModel.cs" />
     <Compile Include="ViewModels\AOSViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ExpertTablesContainerViewModel.cs" />
+    <Compile Include="ViewModels\ExpertTableViewModel.cs" />
     <Compile Include="ViewModels\ISideMenuViewModel.cs" />
     <Compile Include="ViewModels\RuleBaseViewModel.cs" />
     <Compile Include="ViewModels\SideMenu\SideMenuConstructorViewModel.cs" />
@@ -83,6 +91,12 @@
     </Compile>
     <Compile Include="Views\AOSContainer.xaml.cs">
       <DependentUpon>AOSContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExpertTablesContainerView.xaml.cs">
+      <DependentUpon>ExpertTablesContainerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExpertTableView.xaml.cs">
+      <DependentUpon>ExpertTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RuleBaseView.xaml.cs">
       <DependentUpon>RuleBaseView.xaml</DependentUpon>
@@ -123,6 +137,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AOSContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExpertTablesContainerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ExpertTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +200,10 @@
     <Folder Include="Views\RuleBase\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataGrid2DLibrary\DataGrid2DLibrary.csproj">
+      <Project>{7d76d9e7-af25-4aa5-995b-e1a526f192ea}</Project>
+      <Name>DataGrid2DLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FuzzySystem\FuzzySystem.csproj">
       <Project>{f6f18823-77e7-41a3-8c7b-0dc7a9c1303d}</Project>
       <Name>FuzzySystem</Name>
