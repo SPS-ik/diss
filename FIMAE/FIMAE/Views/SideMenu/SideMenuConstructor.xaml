@@ -179,38 +179,15 @@
                 <TextBlock Text="Список значень"
                        Margin="24,8,24,4"/>
                 <ListBox Margin="24,4,24,6"
-                     MinHeight="96"
-                     MaxHeight="96"
+                     Height="64"
                      ItemsSource="{Binding Path=NewLimitTerms, UpdateSourceTrigger=PropertyChanged}">
-                </ListBox>
+                </ListBox>                
 
                 <StackPanel Orientation="Horizontal"
                             Margin="24,6,24,0">
-                    <StackPanel Orientation="Vertical">
-                        <TextBox Text="{Binding NewLimitTermName, UpdateSourceTrigger=PropertyChanged}"
-                                 Width="156"
-                                 Margin="0,0,12,0"/>
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="0,8,0,0">
-                            <TextBlock Text="A"
-                                       Margin="2,0,0,0"/>
-                            <TextBox Text="{Binding A, UpdateSourceTrigger=PropertyChanged}"
-                             Width="24"
-                             Margin="4,0"/>
-                            <TextBlock Text="B"/>
-                            <TextBox Text="{Binding B, UpdateSourceTrigger=PropertyChanged}"
-                             Width="24"
-                             Margin="4,0"/>
-                            <TextBlock Text="C"/>
-                            <TextBox Text="{Binding C, UpdateSourceTrigger=PropertyChanged}"
-                             Width="24"
-                             Margin="4,0"/>
-                            <TextBlock Text="D"/>
-                            <TextBox Text="{Binding D, UpdateSourceTrigger=PropertyChanged}"
-                             Width="24"
-                             Margin="4,0"/>
-                        </StackPanel>
-                    </StackPanel>
+                    <TextBox Text="{Binding NewLimitTermName, UpdateSourceTrigger=PropertyChanged}"
+                             Width="156"
+                             Margin="0,0,12,0"/>
                     <Button HorizontalAlignment="Right"
                         Width="24"
                         Height="24"
@@ -218,6 +195,11 @@
                         Command="{Binding AddLimitTermCommand}"/>
                 </StackPanel>
 
+                <TextBlock Text="Обмежувана ознака"
+                       Margin="24,8,24,4"/>
+                <ComboBox ItemsSource="{Binding AosList, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValue ="{Binding DependedAos}"
+                                  Margin="24,4"/>
 
                 <Button HorizontalAlignment="Center"
                     Margin="24,12"

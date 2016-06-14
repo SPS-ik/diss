@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FIMAE.FIMAS.ExpertSystem
 {
+    [Serializable]
     public class ExpertSystemTable
     {
         public IExpertVariable InputVar;

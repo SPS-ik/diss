@@ -29,8 +29,7 @@ namespace FIMAE.Models
 
         public void AddDefiningFeature(DefiningFeature definingFeature)
         {
-            _fimas.StepwiseFeaturesModel.DefiningFeaturesList.Add(definingFeature);
-            _fimas.AosList.Add(new AgentOrientedSubsystem(definingFeature));
+            _fimas.AosList.Add(new AgentOrientedSubsystem(definingFeature, _fimas.ExpertSystemController));
                                     
             if (OnAosListChanged != null)
             {
@@ -41,10 +40,13 @@ namespace FIMAE.Models
             {
                 AddTable(
                     new ExpertSystemTable(
-                        _fimas.AosList[_fimas.AosList.Count - 1].CurrentFeature,
-                        _fimas.AosList[_fimas.AosList.Count - 2].CurrentFeature));
-                
-                OnExpertTablesChanged();
+                        _fimas.AosList[_fimas.AosList.Count - 2].CurrentFeature,
+                        _fimas.AosList[_fimas.AosList.Count - 1].CurrentFeature));
+
+                if (OnExpertTablesChanged != null)
+                {
+                    OnExpertTablesChanged();
+                }
             }
         }
 
@@ -61,6 +63,16 @@ namespace FIMAE.Models
             {
                 OnLimitsChanged();
             }
+            
+            AddTable(
+                new ExpertSystemTable(
+                    _fimas.LimitsList[_fimas.LimitsList.Count - 1],
+                    _fimas.LimitsList[_fimas.LimitsList.Count - 1].DependedFeature));
+
+            if (OnExpertTablesChanged != null)
+            {
+                OnExpertTablesChanged();
+            }
         }
 
         public List<ExpertSystemTable> GetTables()
@@ -72,25 +84,32 @@ namespace FIMAE.Models
         {
             _fimas.ExpertSystemController.ExpertSystemTables.Add(table);
 
-            if (OnRuleBaseChanged != null)
+            if (OnExpertTablesChanged != null)
             {
-                OnRuleBaseChanged();
+                OnExpertTablesChanged();
             }
         }
 
         public List<KnowledgeBaseRule> GetRules()
         {
-            return _fimas.KnowledgeBaseController.GetRules();
+            //return _fimas.KnowledgeBaseController.GetRules();
+            throw new NotImplementedException();
         }
 
         public void AddRule(KnowledgeBaseRule rule)
         {
-            _fimas.KnowledgeBaseController.AddRule(rule);
+            //_fimas.KnowledgeBaseController.AddRule(rule);
 
-            if (OnRuleBaseChanged != null)
-            {
-                OnRuleBaseChanged();
-            }
+            //if (OnRuleBaseChanged != null)
+            //{
+            //    OnRuleBaseChanged();
+            //}
+            throw new NotImplementedException();
+        }
+
+        public void Calculate(List<ExpertExpression> inputExpressions, string inputValue)
+        {
+            _fimas.Calculate(inputExpressions, inputValue);
         }
        
 

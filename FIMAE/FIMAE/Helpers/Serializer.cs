@@ -15,23 +15,22 @@ namespace FIMAE.Helpers
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        public void Save(List<AgentOrientedSubsystem> aosList, string fileName)
+        public void Save(Fimas fimas, string fileName)
         {
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                // сериализуем весь массив people
-                formatter.Serialize(fs, aosList);
+                formatter.Serialize(fs, fimas);
             }
         }
 
-        public List<AgentOrientedSubsystem> Restore(string fileName)
+        public Fimas Restore(string fileName)
         {
-            List<AgentOrientedSubsystem> aosList;
+            Fimas fimas;
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                aosList = (List<AgentOrientedSubsystem>)formatter.Deserialize(fs);
+                fimas = (Fimas)formatter.Deserialize(fs);
             }
-            return aosList;
+            return fimas;
         }
 
     }

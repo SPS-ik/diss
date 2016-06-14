@@ -6,8 +6,20 @@
              mc:Ignorable="d">
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="Визначальні ознаки"
+                   Grid.Row="0"
+                   FontSize="18"
+                   Margin="16,16,16,0"/>
+        
         <ItemsControl ItemsSource="{Binding AOSViewModelsList}"
-                      ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      Grid.Row="1"
+                      VerticalContentAlignment="Top">
             <ItemsControl.ItemContainerStyle>
                 <Style>
                     <Setter Property="FrameworkElement.Margin" Value="16"/>

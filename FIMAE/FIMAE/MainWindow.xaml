@@ -6,10 +6,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="ГІМАС" 
-        ResizeMode="NoResize"
+        Title="ГІМАС"
         Width="768"
-        Height="535">
+        Height="535"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -22,7 +22,7 @@
                 VerticalAlignment="Top">
 
             <ContentControl Content="{Binding SideMenuControl}"
-                            Height="535"
+                            Height="496"
                             Width="240" />
         </Border>
         <Border x:Name="MainBorder"
@@ -31,22 +31,23 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Grid.Column="1">
-            <Grid>
+            <Grid Height="496"
+                  Width="510">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <ContentControl Content="{Binding AOSContainer}"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Stretch"
-                                MinHeight="334"
-                                MinWidth="508"/>
+                                MinWidth="510"
+                                MinHeight="296"/>
                 <ContentControl Content="{Binding ExpertTablesContainer}"
                                 Grid.Row="1"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Stretch"
-                                MinWidth="508"
-                                MinHeight="160"/>
+                                MinWidth="510"
+                                Height="200"/>
             </Grid>
         </Border>
     </Grid>

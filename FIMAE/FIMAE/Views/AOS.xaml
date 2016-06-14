@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-	Height="285"
+	Height="182"
 	Width="136">
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot"
+          Background="#cccccc">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="64"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="{Binding FeatureName}"
@@ -20,8 +21,10 @@
 					HorizontalAlignment="Center"/>
 
         <ListBox Grid.Row="1"
-                 ItemsSource="{Binding FeatureValue}"/>
-        <Grid Grid.Row="2">
+                 ItemsSource="{Binding FeatureValue}"
+                 SelectedValue="{Binding CalculatedValue}"/>
+        <Grid Grid.Row="2"
+              Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

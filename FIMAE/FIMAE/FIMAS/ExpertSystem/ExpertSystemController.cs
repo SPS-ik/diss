@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FIMAE.FIMAS.ExpertSystem
 {
+    [Serializable]
     public class ExpertSystemController
     {
         public List<ExpertSystemTable> ExpertSystemTables = new List<ExpertSystemTable>();
@@ -23,7 +24,7 @@ namespace FIMAE.FIMAS.ExpertSystem
                     {
                         for (int i = 0; i < outputVar.Values.Count; i++)
                         {
-                            sumOutputValues[i] = table.ValuesTable[inputExpression.Variable.Values.IndexOf(inputExpression.Value), i];
+                            sumOutputValues[i] += table.ValuesTable[inputExpression.Variable.Values.IndexOf(inputExpression.Value), i];
                         }
                     }
                 }

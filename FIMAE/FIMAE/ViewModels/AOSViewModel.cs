@@ -14,6 +14,12 @@ namespace FIMAE.ViewModels
         public AOSViewModel(AgentOrientedSubsystem aos)
         {
             _aos = aos;
+            _aos.OnAosSelectionChanged += AosSelectionChanged;
+        }
+
+        public void AosSelectionChanged()
+        {
+            OnPropertyChanged("CalculatedValue");
         }
 
         public string FeatureName
@@ -24,6 +30,12 @@ namespace FIMAE.ViewModels
         public List<string> FeatureValue
         {
             get { return _aos.CurrentFeature.Values; }
+        }
+
+        public string CalculatedValue
+        {
+            get { return _aos.CalculatedValue; }
+            set { _aos.CalculatedValue = value; }
         }
     }
 }

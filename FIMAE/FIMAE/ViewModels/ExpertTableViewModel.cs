@@ -1,10 +1,12 @@
 ﻿using FIMAE.FIMAS.ExpertSystem;
+using FIMAE.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FIMAE.ViewModels
 {
@@ -12,24 +14,24 @@ namespace FIMAE.ViewModels
     {
         private ExpertSystemTable _table;
 
-        private ObservableCollection<List<int>> _tableLists;
-        public ObservableCollection<List<int>> TableLists
-        {
-            get { return _tableLists; }
-            set
-            {
-                _tableLists = value;
-                foreach(var valuesList in _tableLists)
-                {
-                    foreach(var val in valuesList)
-                    {
-                        _table.ValuesTable[_tableLists.IndexOf(valuesList), valuesList.IndexOf(val)] = val;
-                    }
-                }
+        //private ObservableCollection<List<int>> _tableLists;
+        public ObservableCollection<List<int>> TableLists { get; set; }
+        //{
+        //    get { return _tableLists; }
+        //    set
+        //    {
+        //        _tableLists = value;
+        //        foreach(var valuesList in _tableLists)
+        //        {
+        //            foreach(var val in valuesList)
+        //            {
+        //                _table.ValuesTable[_tableLists.IndexOf(valuesList), valuesList.IndexOf(val)] = val;
+        //            }
+        //        }
 
-                OnPropertyChanged("TableLists");
-            }
-        }
+        //        OnPropertyChanged("TableLists");
+        //    }
+        //}
         
         public string TableName
         {
@@ -50,6 +52,29 @@ namespace FIMAE.ViewModels
                     TableLists[i].Add(_table.ValuesTable[i,j]);
                 }
             }
+        }
+
+        private ICommand _saveTableCommand;
+        public ICommand SaveTableCommand
+        {
+            get
+            {
+                return _saveTableCommand ?? (_saveTableCommand = new RelayCommand((obj) => { SaveTable(obj); }));
+            }
+        }
+
+        public void SaveTable(object o)
+        {
+            foreach (var valuesList in TableLists)
+            {
+                foreach (var val in valuesList)
+                {
+                    _table.ValuesTable[TableLists.IndexOf(valuesList), valuesList.IndexOf(val)] = val;
+                
+                }
+            }
+
+            OnPropertyChanged("TableLists");
         }
 
 

@@ -33,10 +33,17 @@ namespace FIMAE.ViewModels.SideMenu
         public SideMenuConstructorViewModel(SideMenuContainerViewModel container, FimasModel fimas)
         {
             _fimas = fimas;
+            _fimas.OnAosListChanged += AOSListChanged;
+
             _container = container;
             NewPropertyValues = new ObservableCollection<string>();
             NewLimitTerms = new ObservableCollection<string>();
             AddedInputExpressions = new ObservableCollection<KnowledgeBaseExpression>();
+        }
+
+        public void AOSListChanged()
+        {
+            OnPropertyChanged("AosList");
         }
 
         public string CurrentMode
@@ -95,7 +102,7 @@ namespace FIMAE.ViewModels.SideMenu
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                saver.Save(_fimas.GetAosList(), saveFileDialog.FileName);
+                saver.Save(_fimas._fimas, saveFileDialog.FileName);
             }
         }
 
@@ -111,16 +118,29 @@ namespace FIMAE.ViewModels.SideMenu
 
         public void Open(object o)
         {
-            List<AgentOrientedSubsystem> restoredAosList;
+            Fimas restoredFimas;
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                restoredAosList = saver.Restore(openFileDialog.FileName);
+                restoredFimas = saver.Restore(openFileDialog.FileName);
+
                 _fimas.GetAosList().Clear();
-                foreach (var aos in restoredAosList)
+                foreach (var aos in restoredFimas.AosList)
                 {
                     _fimas.AddDefiningFeature(aos.CurrentFeature);
+                }
+
+                _fimas.GetLimits().Clear();
+                foreach (var limit in restoredFimas.LimitsList)
+                {
+                    _fimas.AddLimit(limit);
+                }
+
+                _fimas.GetTables().Clear();
+                foreach (var table in restoredFimas.ExpertSystemController.ExpertSystemTables)
+                {
+                    _fimas.AddTable(table);
                 }
             }
         }
@@ -242,6 +262,22 @@ namespace FIMAE.ViewModels.SideMenu
             }
         }
 
+        public ObservableCollection<AgentOrientedSubsystem> AosList
+        {
+            get { return new ObservableCollection<AgentOrientedSubsystem>(_fimas.GetAosList().Where(n => _fimas.GetAosList().IndexOf(n) != 0).ToList()); }
+        }
+
+        private AgentOrientedSubsystem _dependedAos;
+        public AgentOrientedSubsystem DependedAos
+        {
+            get { return _dependedAos; }
+            set
+            {
+                _dependedAos = value;
+                RelayCommand.UpdateCanExecute();
+            }
+        }
+
         private string _newLimitName;
         public string NewLimitName
         {
@@ -358,7 +394,7 @@ namespace FIMAE.ViewModels.SideMenu
                     },
                     o =>
                     {
-                        return !String.IsNullOrEmpty(NewLimitName) && NewLimitTerms.Count > 0;
+                        return DependedAos != null && !String.IsNullOrEmpty(NewLimitName) && NewLimitTerms.Count > 0;
                     }
                     ));
             }
@@ -367,7 +403,8 @@ namespace FIMAE.ViewModels.SideMenu
         public void AddLimit(object o)
         {
             var newVariable = new Limit();
-            newVariable.Name = NewLimitName;
+            newVariable.Name = NewLimitName + " (Limit)";
+            newVariable.DependedFeature = DependedAos.CurrentFeature;
             foreach (var value in NewLimitTerms)
             {
                 newVariable.Values.Add(value);
@@ -386,6 +423,9 @@ namespace FIMAE.ViewModels.SideMenu
 
             OnPropertyChanged("AccessibleInVars");
             OnPropertyChanged("AccessibleOutVars");
+
+            DependedAos = null;
+            OnPropertyChanged("DependedAos");
         }
         #endregion
         
