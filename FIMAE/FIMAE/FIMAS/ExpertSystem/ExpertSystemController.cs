@@ -13,7 +13,7 @@ namespace FIMAE.FIMAS.ExpertSystem
 
         public string CalculateOutputValue(List<ExpertExpression> inputExpressions, IExpertVariable outputVar)
         {
-            var sumOutputValues = new int[outputVar.Values.Count];
+            var sumOutputValues = new Double[outputVar.Values.Count];
 
             foreach(var table in ExpertSystemTables)
             {

@@ -14,24 +14,7 @@ namespace FIMAE.ViewModels
     {
         private ExpertSystemTable _table;
 
-        //private ObservableCollection<List<int>> _tableLists;
-        public ObservableCollection<List<int>> TableLists { get; set; }
-        //{
-        //    get { return _tableLists; }
-        //    set
-        //    {
-        //        _tableLists = value;
-        //        foreach(var valuesList in _tableLists)
-        //        {
-        //            foreach(var val in valuesList)
-        //            {
-        //                _table.ValuesTable[_tableLists.IndexOf(valuesList), valuesList.IndexOf(val)] = val;
-        //            }
-        //        }
-
-        //        OnPropertyChanged("TableLists");
-        //    }
-        //}
+        public ObservableCollection<List<Double>> TableLists { get; set; }
         
         public string TableName
         {
@@ -42,10 +25,10 @@ namespace FIMAE.ViewModels
         {
             _table = table;
 
-            TableLists = new ObservableCollection<List<int>>();
+            TableLists = new ObservableCollection<List<Double>>();
             for (int i = 0; i < _table.InputVar.Values.Count; i++)
             {
-                TableLists.Add(new List<int>());
+                TableLists.Add(new List<Double>());
 
                 for (int j = 0; j < _table.OutputVar.Values.Count; j++)
                 {

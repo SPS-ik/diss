@@ -11,14 +11,14 @@ namespace FIMAE.FIMAS.ExpertSystem
     {
         public IExpertVariable InputVar;
         public IExpertVariable OutputVar;
-        public int[,] ValuesTable;
+        public Double[,] ValuesTable;
 
         public ExpertSystemTable(IExpertVariable inputVar, IExpertVariable outputVar)
         {
             InputVar = inputVar;
             OutputVar = outputVar;
 
-            ValuesTable = new int[InputVar.Values.Count, OutputVar.Values.Count];
+            ValuesTable = new Double[InputVar.Values.Count, OutputVar.Values.Count];
         }
 
         public bool TrySetValue(string inputValue, string outputValue, int expertValue)

@@ -7,43 +7,42 @@
          d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="ellipse">
-            <Grid  Margin="0,10,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <Border MaxWidth="110"
+                    BorderThickness="1"
+                    BorderBrush="Gray"
+                    Margin="0,4">
                 <TextBlock HorizontalAlignment="Center"
-                           Text="{Binding  StringFormat=N2}"
+                           Text="{Binding}"
                            TextAlignment="Center"
-                           Margin="0,6"/>
-                <Ellipse Grid.Row="1"
-                         Width="40" 
-                         Height="40" 
-                         Fill="LightGray" 
-                         Stroke="Black" 
-                         StrokeThickness="2"/>
-            </Grid>
+                           Margin="8"
+                           TextWrapping="Wrap"/>
+            </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="panel">
             <Grid Margin="35,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                
-                    <TextBlock Text="{Binding FeatureName}"
-					    FontSize="16"
-					    VerticalAlignment="Center"
-					    HorizontalAlignment="Center"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="textBlockFeatureName"
+                           Text="{Binding FeatureName}"
+					       FontSize="16"
+					       VerticalAlignment="Center"
+					       HorizontalAlignment="Center"
+                           MaxWidth="150"
+                           TextWrapping="Wrap"
+                           TextTrimming="CharacterEllipsis"/>
 
                 <ListBox x:Name="Nodes"
                          Grid.Row="1"
+                         HorizontalContentAlignment="Stretch"
                          ItemsSource="{Binding FeatureValues}"
                          ItemTemplate="{StaticResource ellipse}"
                          SelectedValue="{Binding CalculatedValue}"
                          SelectionChanged="Nodes_SelectionChanged"
-                         IsEnabled="False"/>
+                         IsEnabled="True"/>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>

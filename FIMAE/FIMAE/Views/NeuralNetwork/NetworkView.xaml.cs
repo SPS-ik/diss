@@ -47,6 +47,7 @@ namespace FIMAE.Views.NeuralNetwork
 
             ItemsCanvas.Children.Clear();
 
+            var FeatureNameHeight = 60;
             for (var i = 0; i < aosList.Count - 1; i++)
             {
                 UIElement currContainer = (UIElement)Panel.ItemContainerGenerator.ContainerFromIndex(i);
@@ -56,15 +57,15 @@ namespace FIMAE.Views.NeuralNetwork
                 {
                     for (int k = 0; k < aosList[i + 1].FeatureValues.Count; k++)
                     {
-                        var currHeight = (currContainer.DesiredSize.Height - 20) / aosList[i].FeatureValues.Count;
+                        var currHeight = (currContainer.DesiredSize.Height - FeatureNameHeight) / aosList[i].FeatureValues.Count;
                         var currPoint = currContainer.TranslatePoint(
                             new Point(currContainer.DesiredSize.Width - 35,
-                                (j + 0.5) * currHeight + 40), ItemsCanvas);
+                                (j + 0.5) * currHeight + FeatureNameHeight), ItemsCanvas);
 
-                        var nextHeight = (nextContainer.DesiredSize.Height - 20) / aosList[i + 1].FeatureValues.Count;
+                        var nextHeight = (nextContainer.DesiredSize.Height - FeatureNameHeight) / aosList[i + 1].FeatureValues.Count;
                         var nextPoint = nextContainer.TranslatePoint(
                             new Point(35,
-                                (k + 0.5) * nextHeight + 40), ItemsCanvas);
+                                (k + 0.5) * nextHeight + FeatureNameHeight), ItemsCanvas);
 
                         Line line = new Line()
                         {
