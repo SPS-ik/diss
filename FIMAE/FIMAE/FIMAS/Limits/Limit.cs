@@ -12,8 +12,8 @@ namespace FIMAE.FIMAS.Limits
     [Serializable]
     public class Limit : IExpertVariable
     {
-        public string Name { get; set; }
-        public List<string> Values { get; set; }
+        public override string Name { get; set; }
+        public override List<string> Values { get; set; }
         public DefiningFeature DependedFeature { get; set; }
 
         public Limit()

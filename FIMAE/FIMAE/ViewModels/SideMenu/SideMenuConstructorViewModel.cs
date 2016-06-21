@@ -99,10 +99,13 @@ namespace FIMAE.ViewModels.SideMenu
         public void Save(object o)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML Files|*.xml";
+            saveFileDialog.DefaultExt = "xml";
+            saveFileDialog.AddExtension = true;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                saver.Save(_fimas._fimas, saveFileDialog.FileName);
+                saver.SaveToXml(_fimas._fimas, saveFileDialog.FileName);
             }
         }
 
@@ -121,9 +124,13 @@ namespace FIMAE.ViewModels.SideMenu
             Fimas restoredFimas;
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML Files|*.xml";
+            openFileDialog.DefaultExt = "xml";
+            openFileDialog.AddExtension = true;
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                restoredFimas = saver.Restore(openFileDialog.FileName);
+                restoredFimas = saver.RestoreFromXml(openFileDialog.FileName);
 
                 _fimas.GetAosList().Clear();
                 foreach (var aos in restoredFimas.AosList)

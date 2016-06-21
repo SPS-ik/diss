@@ -10,8 +10,8 @@ namespace FIMAE.FIMAS.DefiningFeatures
     [Serializable]
     public class DefiningFeature : IExpertVariable
     {
-        public string Name { get; set; }
-        public List<string> Values { get; set; }
+        public override string Name { get; set; }
+        public override List<string> Values { get; set; }
 
         public DefiningFeature()
         {

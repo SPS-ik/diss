@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FIMAE.FIMAS.DefiningFeatures;
 using FIMAE.Helpers;
 using FIMAE.FIMAS.ExpertSystem;
+using System.Xml.Serialization;
 
 namespace FIMAE.FIMAS
 {
@@ -17,7 +18,12 @@ namespace FIMAE.FIMAS
         string _calculatedValue;
 
         [NonSerialized]
+        [XmlIgnore]
         public Action OnAosSelectionChanged;
+
+        public AgentOrientedSubsystem()
+        {
+        }
 
         public AgentOrientedSubsystem(DefiningFeature currentFeature, ExpertSystemController expertSystemController)
         {
@@ -27,7 +33,8 @@ namespace FIMAE.FIMAS
 
         public DefiningFeature CurrentFeature
         { 
-            get { return _currentFeature; } 
+            get { return _currentFeature; }
+            set { _currentFeature = value; }
         }
 
         public string CalculatedValue

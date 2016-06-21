@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FIMAE.FIMAS.ExpertSystem
 {
-    public interface IExpertVariable
+    [Serializable]
+    public abstract class IExpertVariable
     {
-        string Name {get; set;}
-        List<string> Values { get; set; }
+        public abstract string Name { get; set; }
+        public abstract List<string> Values { get; set; }
     }
 }

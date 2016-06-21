@@ -32,7 +32,7 @@ namespace FIMAE.ViewModels
 
                 for (int j = 0; j < _table.OutputVar.Values.Count; j++)
                 {
-                    TableLists[i].Add(_table.ValuesTable[i,j]);
+                    TableLists[i].Add(_table.ValuesTable[i][j]);
                 }
             }
         }
@@ -52,7 +52,7 @@ namespace FIMAE.ViewModels
             {
                 foreach (var val in valuesList)
                 {
-                    _table.ValuesTable[TableLists.IndexOf(valuesList), valuesList.IndexOf(val)] = val;
+                    _table.ValuesTable[TableLists.IndexOf(valuesList)][valuesList.IndexOf(val)] = val;
                 
                 }
             }
