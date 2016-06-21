@@ -31,6 +31,16 @@ namespace FIMAE.Views.NeuralNetwork
             UpdateRelations();
         }
 
+        private void ScrollViewer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            UpdateRelations();
+        }
+
+        private void Nodes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateRelations();
+        }
+
         private void UpdateRelations()
         {
             var aosList = (DataContext as AOSContainerViewModel).AOSViewModelsList;

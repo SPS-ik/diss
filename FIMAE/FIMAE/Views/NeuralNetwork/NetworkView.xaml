@@ -37,10 +37,13 @@
 					    VerticalAlignment="Center"
 					    HorizontalAlignment="Center"/>
 
-                <ItemsControl x:Name="Nodes"
+                <ListBox x:Name="Nodes"
                          Grid.Row="1"
                          ItemsSource="{Binding FeatureValues}"
-                         ItemTemplate="{StaticResource ellipse}"/>
+                         ItemTemplate="{StaticResource ellipse}"
+                         SelectedValue="{Binding CalculatedValue}"
+                         SelectionChanged="Nodes_SelectionChanged"
+                         IsEnabled="False"/>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
@@ -49,7 +52,9 @@
         <Canvas x:Name="ItemsCanvas"
                 ClipToBounds="True"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto" ScrollChanged="ScrollViewer_ScrollChanged">
+                      HorizontalScrollBarVisibility="Auto"
+                      ScrollChanged="ScrollViewer_ScrollChanged"
+                      MouseEnter="ScrollViewer_MouseEnter">
                 <ItemsControl x:Name="Panel"
                             ItemsSource="{Binding AOSViewModelsList}"
                             ItemTemplate="{StaticResource panel}">
