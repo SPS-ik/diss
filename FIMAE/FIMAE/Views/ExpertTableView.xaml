@@ -11,20 +11,14 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <dg2d:DataGrid2D Name="dataGrid2D"
-                             Grid.Row="0"
-                             Margin="8"
-                             AlternationCount="2"
-                             UseModifiedDataGridStyle="True"
-                             ItemsSource2D="{Binding TableLists}"
-                             RowBackground="White"
-                             AlternatingRowBackground="#ebebeb"                       
-                             Background="Transparent">
+                        Grid.Row="0"
+                        AlternationCount="2"
+                        UseModifiedDataGridStyle="True"
+                        ItemsSource2D="{Binding TableLists}"
+                        RowBackground="White"
+                        AlternatingRowBackground="#ebebeb"                       
+                        Background="Transparent"
+                        SelectedCellsChanged="dataGrid2D_SelectedCellsChanged">
         </dg2d:DataGrid2D>
-        <Button Grid.Row="1"
-                Content="Зберегти"
-                Command="{Binding SaveTableCommand}"
-                HorizontalAlignment="Left"
-                Width="120"
-                Margin="8,0,8,8"/>
     </Grid>
 </UserControl>

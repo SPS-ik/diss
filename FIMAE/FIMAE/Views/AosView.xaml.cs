@@ -18,9 +18,9 @@ namespace FIMAE.Views
     /// <summary>
     /// Interaction logic for AOS.xaml
     /// </summary>
-    public partial class AOS : UserControl
+    public partial class AosView : UserControl
     {
-        public AOS()
+        public AosView()
         {
             InitializeComponent();
         }

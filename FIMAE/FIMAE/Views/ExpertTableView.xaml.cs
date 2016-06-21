@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FIMAE.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace FIMAE.Views
         public ExpertTableView()
         {
             InitializeComponent();
+        }
+
+        private void dataGrid2D_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            (DataContext as ExpertTableViewModel).SaveTableCommand.Execute(null);
         }
     }
 }

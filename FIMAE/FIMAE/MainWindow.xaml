@@ -9,7 +9,9 @@
         Title="ГІМАС"
         Width="768"
         Height="535"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        MinWidth="768"
+        MinHeight="535"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -19,35 +21,45 @@
                 BorderBrush="Black"
                 BorderThickness="1"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+                VerticalAlignment="Stretch">
 
             <ContentControl Content="{Binding SideMenuControl}"
-                            Height="496"
+                            VerticalAlignment="Top"
+                            MinHeight="496"
                             Width="240" />
         </Border>
         <Border x:Name="MainBorder"
                 BorderBrush="Black"
-                BorderThickness="1"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Grid.Column="1">
-            <Grid Height="496"
-                  Width="510">
+            <Grid MinHeight="496"
+                  MinWidth="510">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="3"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
+                
                 <ContentControl Content="{Binding AOSContainer}"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Stretch"
+                                VerticalAlignment="Stretch"
                                 MinWidth="510"
                                 MinHeight="296"/>
+
+                <GridSplitter Grid.Row="1"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              Background="Gray" 
+                              ShowsPreview="True"
+                              Height="3"/>
+
                 <ContentControl Content="{Binding ExpertTablesContainer}"
-                                Grid.Row="1"
+                                Grid.Row="2"
                                 HorizontalContentAlignment="Stretch"
                                 VerticalContentAlignment="Stretch"
-                                MinWidth="510"
-                                Height="200"/>
+                                VerticalAlignment="Top"/>
             </Grid>
         </Border>
     </Grid>

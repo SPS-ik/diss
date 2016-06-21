@@ -27,7 +27,7 @@ namespace FIMAE.ViewModels
             get { return _aos.CurrentFeature.Name; }
         }
 
-        public List<string> FeatureValue
+        public List<string> FeatureValues
         {
             get { return _aos.CurrentFeature.Values; }
         }

@@ -85,8 +85,8 @@
     <Compile Include="ViewModels\SideMenu\SideMenuContainerViewModel.cs" />
     <Compile Include="ViewModels\SideMenu\SideMenuProcessingViewModel.cs" />
     <Compile Include="ViewModels\SideMenu\SideMenuStartViewModel.cs" />
-    <Compile Include="Views\AOS.xaml.cs">
-      <DependentUpon>AOS.xaml</DependentUpon>
+    <Compile Include="Views\AosView.xaml.cs">
+      <DependentUpon>AosView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AOSContainer.xaml.cs">
       <DependentUpon>AOSContainer.xaml</DependentUpon>
@@ -96,6 +96,9 @@
     </Compile>
     <Compile Include="Views\ExpertTableView.xaml.cs">
       <DependentUpon>ExpertTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NeuralNetwork\NetworkView.xaml.cs">
+      <DependentUpon>NetworkView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RuleBaseView.xaml.cs">
       <DependentUpon>RuleBaseView.xaml</DependentUpon>
@@ -131,7 +134,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AOS.xaml">
+    <Page Include="Views\AosView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,6 +147,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\ExpertTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NeuralNetwork\NetworkView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

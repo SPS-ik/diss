@@ -1,10 +1,13 @@
-﻿using FIMAE.Models;
+﻿using FIMAE.Helpers;
+using FIMAE.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace FIMAE.ViewModels
 {
@@ -34,6 +37,35 @@ namespace FIMAE.ViewModels
             }
             OnPropertyChanged("ExpertTablesViewModelsList");
         }
-        
+
+        public Visibility IsVisible { get; set; }
+
+        public string Header
+        {
+            get { return (IsVisible == Visibility.Visible ? @"\/" : @"/\") + " Експертні таблиці"; }
+        }
+
+        private ICommand _changeVisibilityCommand;
+        public ICommand ChangeVisibilityCommand
+        {
+            get
+            {
+                return _changeVisibilityCommand ?? (_changeVisibilityCommand = new RelayCommand((obj) => { ChangeVisibility(obj); }));
+            }
+        }
+
+        public void ChangeVisibility(object o)
+        {
+            if (IsVisible == Visibility.Visible)
+            {
+                IsVisible = Visibility.Collapsed;
+            }
+            else
+            {
+                IsVisible = Visibility.Visible;
+            }
+            OnPropertyChanged("Header");
+            OnPropertyChanged("IsVisible");
+        }        
     }
 }

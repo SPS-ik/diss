@@ -3,7 +3,8 @@
                     xmlns:ViewModels="clr-namespace:FIMAE.ViewModels"
                     xmlns:Views="clr-namespace:FIMAE.Views"
                     xmlns:SideMenuVM="clr-namespace:FIMAE.ViewModels.SideMenu"
-                    xmlns:SideMenuV="clr-namespace:FIMAE.Views.SideMenu">
+                    xmlns:SideMenuV="clr-namespace:FIMAE.Views.SideMenu"
+                    xmlns:NeuralNetworkV="clr-namespace:FIMAE.Views.NeuralNetwork">
 
     <DataTemplate DataType="{x:Type SideMenuVM:SideMenuContainerViewModel}">
         <SideMenuV:SideMenuContainer />
@@ -22,11 +23,12 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type ViewModels:AOSViewModel}">
-        <Views:AOS/>
+        <Views:AosView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type ViewModels:AOSContainerViewModel }">
-        <Views:AOSContainer/>
+        <!--<Views:AOSContainer/>-->
+        <NeuralNetworkV:NetworkView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type ViewModels:RuleBaseViewModel }">
