@@ -30,7 +30,7 @@ namespace FIMAE.FIMAS.ExpertSystem
             }
         }
 
-        public bool TrySetValue(string inputValue, string outputValue, int expertValue)
+        public bool TrySetValue(string inputValue, string outputValue, Double expertValue)
         {
             if (!InputVar.Values.Contains(inputValue) || !OutputVar.Values.Contains(outputValue))
             {

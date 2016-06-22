@@ -17,9 +17,9 @@ namespace FIMAE.FIMAS.ExpertSystem
 
             foreach(var table in ExpertSystemTables)
             {
-                if(table.OutputVar == outputVar)
+                if(table.OutputVar.Name == outputVar.Name)
                 {
-                    var inputExpression = inputExpressions.FirstOrDefault(ie => ie.Variable == table.InputVar);
+                    var inputExpression = inputExpressions.FirstOrDefault(ie => ie.Variable.Name == table.InputVar.Name);
                     if (inputExpression != null)
                     {
                         for (int i = 0; i < outputVar.Values.Count; i++)
