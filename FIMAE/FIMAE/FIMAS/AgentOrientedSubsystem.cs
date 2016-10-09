@@ -7,6 +7,7 @@ using FIMAE.FIMAS.DefiningFeatures;
 using FIMAE.Helpers;
 using FIMAE.FIMAS.ExpertSystem;
 using System.Xml.Serialization;
+using FIMAE.FIMAS.FuzzySystem;
 
 namespace FIMAE.FIMAS
 {
@@ -14,7 +15,8 @@ namespace FIMAE.FIMAS
     public class AgentOrientedSubsystem
     {
         DefiningFeature _currentFeature;
-        ExpertSystemController _expertSystemController;
+        ExpertSystemAgent _expertSystemAgent;
+        FuzzyAgent _fuzzyAgent;
         string _calculatedValue;
 
         [NonSerialized]
@@ -25,10 +27,12 @@ namespace FIMAE.FIMAS
         {
         }
 
-        public AgentOrientedSubsystem(DefiningFeature currentFeature, ExpertSystemController expertSystemController)
+        public AgentOrientedSubsystem(DefiningFeature currentFeature, ExpertSystemAgent expertSystemAgent,
+            FuzzyAgent fuzzyAgent)
         {
             _currentFeature = currentFeature;
-            _expertSystemController = expertSystemController;
+            _expertSystemAgent = expertSystemAgent;
+            _fuzzyAgent = fuzzyAgent;
         }
 
         public DefiningFeature CurrentFeature
@@ -57,7 +61,7 @@ namespace FIMAE.FIMAS
 
         public string Calculate(List<ExpertExpression> inputExpressions)
         {
-            return CalculatedValue = _expertSystemController.CalculateOutputValue(inputExpressions, _currentFeature);
+            return CalculatedValue = _expertSystemAgent.CalculateOutputValue(inputExpressions, _currentFeature);
         }
 
         public override string ToString()

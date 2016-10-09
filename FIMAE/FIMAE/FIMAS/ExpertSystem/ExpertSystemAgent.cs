@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FIMAE.FIMAS.ExpertSystem
 {
     [Serializable]
-    public class ExpertSystemController
+    public class ExpertSystemAgent
     {
         public List<ExpertSystemTable> ExpertSystemTables = new List<ExpertSystemTable>();
 

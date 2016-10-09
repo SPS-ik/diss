@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FIMAE.FIMAS.FuzzySystem;
 
 namespace FIMAE.FIMAS
 {
@@ -14,7 +15,8 @@ namespace FIMAE.FIMAS
     {
         public List<AgentOrientedSubsystem> AosList = new List<AgentOrientedSubsystem>();
         public List<Limit> LimitsList = new List<Limit>();
-        public ExpertSystemController ExpertSystemController = new ExpertSystemController();
+        public ExpertSystemAgent ExpertSystemAgent = new ExpertSystemAgent();
+        public FuzzyAgent FuzzyAgent = new FuzzyAgent();
 
         public void Calculate(List<ExpertExpression> inputExpressions, string inputValue)
         {

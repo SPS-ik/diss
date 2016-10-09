@@ -13,7 +13,7 @@ using System.Xml.Serialization;
 
 namespace FIMAE.Helpers
 {
-    class Serializer
+    class SerializeAgent
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
