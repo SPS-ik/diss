@@ -29,7 +29,8 @@ namespace FIMAE.Models
 
         public void AddDefiningFeature(DefiningFeature definingFeature)
         {
-            _fimas.AosList.Add(new AgentOrientedSubsystem(definingFeature, _fimas.ExpertSystemController));
+            _fimas.AosList.Add(new AgentOrientedSubsystem(definingFeature,
+                _fimas.ExpertSystemAgent,_fimas.FuzzyAgent));
                                     
             if (OnAosListChanged != null)
             {
@@ -77,12 +78,12 @@ namespace FIMAE.Models
 
         public List<ExpertSystemTable> GetTables()
         {
-            return _fimas.ExpertSystemController.ExpertSystemTables;
+            return _fimas.ExpertSystemAgent.ExpertSystemTables;
         }
 
         public void AddTable(ExpertSystemTable table)
         {
-            _fimas.ExpertSystemController.ExpertSystemTables.Add(table);
+            _fimas.ExpertSystemAgent.ExpertSystemTables.Add(table);
 
             if (OnExpertTablesChanged != null)
             {
@@ -92,13 +93,13 @@ namespace FIMAE.Models
 
         public List<KnowledgeBaseRule> GetRules()
         {
-            //return _fimas.KnowledgeBaseController.GetRules();
+            //return _fimas.KnowledgeBaseAgent.GetRules();
             throw new NotImplementedException();
         }
 
         public void AddRule(KnowledgeBaseRule rule)
         {
-            //_fimas.KnowledgeBaseController.AddRule(rule);
+            //_fimas.KnowledgeBaseAgent.AddRule(rule);
 
             //if (OnRuleBaseChanged != null)
             //{

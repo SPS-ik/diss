@@ -28,7 +28,7 @@ namespace FIMAE.ViewModels.SideMenu
         private FimasModel _fimas;
         private SideMenuContainerViewModel _container;
         private FimaeConstructorModes _currentMode;
-        private Serializer saver = new Serializer();
+        private SerializeAgent saver = new SerializeAgent();
 
         public SideMenuConstructorViewModel(SideMenuContainerViewModel container, FimasModel fimas)
         {
@@ -145,7 +145,7 @@ namespace FIMAE.ViewModels.SideMenu
                 }
 
                 _fimas.GetTables().Clear();
-                foreach (var table in restoredFimas.ExpertSystemController.ExpertSystemTables)
+                foreach (var table in restoredFimas.ExpertSystemAgent.ExpertSystemTables)
                 {
                     _fimas.AddTable(table);
                 }
