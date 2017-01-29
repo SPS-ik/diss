@@ -7,9 +7,9 @@ namespace FmsModel.Dispatchering
     {
         public List<Product> Products { get; set; }
 
-        public void Start()
+        public void Start(List<Product> products)
         {
-            throw new System.NotImplementedException();
+            Products = products;
         }
     }
 }

@@ -8,5 +8,11 @@ namespace FmsModel.Manufacturing
         public int Priority { get; set; }
         public ProductStatus Status { get; set; }
         public List<TechnicalOperation> TechnicalOperations { get; set; }
+
+        public Product(int id, List<TechnicalOperation> operations, int priority = 1,
+            ProductStatus status = ProductStatus.Blank)
+        {
+
+        }
     }
 }
