@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Fimas
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<AosList>
+		<AgentOrientedSubsystem>
+			<CurrentFeature>
+				<Name>Невизначеності</Name>
+				<Values>
+					<string>несправність ГВМ</string>
+					<string>несправність АТМ</string>
+					<string>затримки у доставці матеріалів</string>
+					<string>дефектність матеріалу</string>
+					<string>відміна операцій</string>
+					<string>зміна пріоритету операцій</string>
+				</Values>
+			</CurrentFeature>
+			<CalculatedValue>пов'язані за ресурсами</CalculatedValue>
+		</AgentOrientedSubsystem>
+		<AgentOrientedSubsystem>
+			<CurrentFeature>
+				<Name>Підходи до планування</Name>
+				<Values>
+					<string>реактивний</string>
+					<string>прогностично-реактивний</string>
+					<string>робастний прогностично-реактивний</string>
+					<string>робастний превентивний</string>
+				</Values>
+			</CurrentFeature>
+			<CalculatedValue>прогностично-реактивний</CalculatedValue>
+		</AgentOrientedSubsystem>
+		<AgentOrientedSubsystem>
+			<CurrentFeature>
+				<Name>Стратегії перепланування</Name>
+				<Values>
+					<string>повне перепланування</string>
+					<string>корекція плану</string>
+				</Values>
+			</CurrentFeature>
+			<CalculatedValue>корекція плану</CalculatedValue>
+		</AgentOrientedSubsystem>
+		<AgentOrientedSubsystem>
+			<CurrentFeature>
+				<Name>Політика часу перепланування</Name>
+				<Values>
+					<string>періодична</string>
+					<string>подієва</string>
+					<string>гібридна</string>
+				</Values>
+			</CurrentFeature>
+			<CalculatedValue>гібридна</CalculatedValue>
+		</AgentOrientedSubsystem>
+		<AgentOrientedSubsystem>
+			<CurrentFeature>
+				<Name>Метод диспетчеризації</Name>
+				<Values>
+					<string>правила диспетчеризації</string>
+					<string>евристики</string>
+					<string>метаевристики</string>
+					<string>ситуаційне управління</string>
+					<string>мультиагентні системи</string>
+				</Values>
+			</CurrentFeature>
+			<CalculatedValue>мультиагентні системи</CalculatedValue>
+		</AgentOrientedSubsystem>
+	</AosList>
+	<LimitsList>
+		<Limit>
+			<Name>Обчислювальна потужність СОУ (Limit)</Name>
+			<Values>
+				<string>низька</string>
+				<string>середня</string>
+				<string>висока</string>
+			</Values>
+			<DependedFeature>
+				<Name>Стратегії перепланування</Name>
+				<Values>
+					<string>повне перепланування</string>
+					<string>корекція плану</string>
+				</Values>
+			</DependedFeature>
+		</Limit>
+		<Limit>
+			<Name>Архітектури СОУ (Limit)</Name>
+			<Values>
+				<string>централізована</string>
+				<string>розподілена</string>
+				<string>мультиагентна</string>
+			</Values>
+			<DependedFeature>
+				<Name>Політика часу перепланування</Name>
+				<Values>
+					<string>періодична</string>
+					<string>подієва</string>
+					<string>гібридна</string>
+				</Values>
+			</DependedFeature>
+		</Limit>
+		<Limit>
+			<Name>Компонувальна схема АТСС (Limit)</Name>
+			<Values>
+				<string>фронтальна</string>
+				<string>поперечна</string>
+				<string>дипольна</string>
+				<string>кутова</string>
+				<string>кругова</string>
+				<string>комбінована</string>
+			</Values>
+			<DependedFeature>
+				<Name>Метод диспетчеризації</Name>
+				<Values>
+					<string>правила диспетчеризації</string>
+					<string>евристики</string>
+					<string>метаевристики</string>
+					<string>ситуаційне управління</string>
+					<string>мультиагентні системи</string>
+				</Values>
+			</DependedFeature>
+		</Limit>
+	</LimitsList>
+	<ExpertSystemController>
+		<ExpertSystemTables>
+			<ExpertSystemTable>
+				<InputVar xsi:type="DefiningFeature">
+					<Name>Невизначеності</Name>
+				<Values>
+					<string>несправність ГВМ</string>
+					<string>несправність АТМ</string>
+					<string>затримки у доставці матеріалів</string>
+					<string>дефектність матеріалу</string>
+					<string>відміна операцій</string>
+					<string>зміна пріоритету операцій</string>
+				</Values>
+				</InputVar>
+				<OutputVar xsi:type="DefiningFeature">
+					<Name>Підходи до планування</Name>
+					<Values>
+						<string>реактивний</string>
+						<string>прогностично-реактивний</string>
+						<string>робастний прогностично-реактивний</string>
+						<string>робастний превентивний</string>
+					</Values>
+				</OutputVar>
+				<ValuesTable>
+					<ArrayOfDouble>
+						<double>0.6</double>
+						<double>0.75</double>
+						<double>0.7</double>
+						<double>0.4</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.7</double>
+						<double>0.6</double>
+						<double>0.8</double>
+						<double>0.5</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.6</double>
+						<double>0.75</double>
+						<double>0.7</double>
+						<double>0.4</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.7</double>
+						<double>0.6</double>
+						<double>0.8</double>
+						<double>0.5</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.6</double>
+						<double>0.75</double>
+						<double>0.7</double>
+						<double>0.4</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.7</double>
+						<double>0.6</double>
+						<double>0.8</double>
+						<double>0.5</double>
+					</ArrayOfDouble>
+				</ValuesTable>
+			</ExpertSystemTable>
+			<ExpertSystemTable>
+				<InputVar xsi:type="DefiningFeature">
+					<Name>Підходи до планування</Name>
+					<Values>
+						<string>реактивний</string>
+						<string>прогностично-реактивний</string>
+						<string>робастний прогностично-реактивний</string>
+						<string>робастний превентивний</string>
+					</Values>
+				</InputVar>
+				<OutputVar xsi:type="DefiningFeature">
+					<Name>Стратегії перепланування</Name>
+					<Values>
+						<string>повне перепланування</string>
+						<string>корекція плану</string>
+					</Values>
+				</OutputVar>
+				<ValuesTable>
+					<ArrayOfDouble>
+						<double>0.2</double>
+						<double>0.9</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.4</double>
+						<double>0.6</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.2</double>
+						<double>0.8</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.3</double>
+						<double>0.7</double>
+					</ArrayOfDouble>
+				</ValuesTable>
+			</ExpertSystemTable>
+			<ExpertSystemTable>
+				<InputVar xsi:type="DefiningFeature">
+					<Name>Стратегії перепланування</Name>
+					<Values>
+						<string>повне перепланування</string>
+						<string>корекція плану</string>
+					</Values>
+				</InputVar>
+				<OutputVar xsi:type="DefiningFeature">
+					<Name>Політика часу</Name>
+					<Values>
+						<string>періодична</string>
+						<string>подієва</string>
+						<string>гібридна</string>
+					</Values>
+				</OutputVar>
+				<ValuesTable>
+					<ArrayOfDouble>
+						<double>0.3</double>
+						<double>0.65</double>
+						<double>0.4</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.4</double>
+						<double>0.65</double>
+						<double>0.7</double>
+					</ArrayOfDouble>
+				</ValuesTable>
+			</ExpertSystemTable>
+			<ExpertSystemTable>
+				<InputVar xsi:type="DefiningFeature">
+					<Name>Політика часу перепланування</Name>
+					<Values>
+						<string>періодична</string>
+						<string>подієва</string>
+						<string>гібридна</string>
+					</Values>
+				</InputVar>
+				<OutputVar xsi:type="DefiningFeature">
+					<Name>Метод диспетчеризації</Name>
+					<Values>
+						<string>правила диспетчеризації</string>
+						<string>евристики</string>
+						<string>метаевристики</string>
+						<string>ситуаційне управління</string>
+						<string>мультиагентні системи</string>
+					</Values>
+				</OutputVar>
+				<ValuesTable>
+					<ArrayOfDouble>
+						<double>0.2</double>
+						<double>0.4</double>
+						<double>0.5</double>
+						<double>0.3</double>
+						<double>0.6</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.7</double>
+						<double>0.3</double>
+						<double>0.4</double>
+						<double>0.8</double>
+						<double>0.6</double>
+					</ArrayOfDouble>
+					<ArrayOfDouble>
+						<double>0.7</double>
+						<double>0.4</double>
+						<double>0.5</double>
+						<double>0.75</double>
+						<double>0.9</double>
+					</ArrayOfDouble>
+				</ValuesTable>
+			</ExpertSystemTable>
+		</ExpertSystemTables>
+	</ExpertSystemController>
+</Fimas>

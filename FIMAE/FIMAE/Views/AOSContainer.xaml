@@ -22,7 +22,7 @@
                       VerticalContentAlignment="Top">
             <ItemsControl.ItemContainerStyle>
                 <Style>
-                    <Setter Property="FrameworkElement.Margin" Value="16"/>
+                    <Setter Property="FrameworkElement.Margin" Value="8"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
 
