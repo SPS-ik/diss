@@ -6,6 +6,7 @@ namespace FmsModel.Dispatchering
     public interface IDispatcheringSystem
     {
         List<Product> Products { get; set; }
-        void Start(List<Product> products);
+        FMS FMS { get; set; }
+        void Start(FMS fms, List<Product> products);
     }
 }

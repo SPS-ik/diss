@@ -63,11 +63,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Dispatchering\AGVManager.cs" />
+    <Compile Include="Dispatchering\FMCManager.cs" />
     <Compile Include="Dispatchering\IDispatcheringSystem.cs" />
     <Compile Include="Dispatchering\RuleBasedDispatchingSystem.cs" />
     <Compile Include="Manufacturing\AGV.cs" />
     <Compile Include="Manufacturing\FMS.cs" />
-    <Compile Include="Manufacturing\FMС.cs" />
+    <Compile Include="Manufacturing\FMC.cs" />
     <Compile Include="Manufacturing\ILocation.cs" />
     <Compile Include="Manufacturing\Product.cs" />
     <Compile Include="Manufacturing\ProductStatus.cs" />

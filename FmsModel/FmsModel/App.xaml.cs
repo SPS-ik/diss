@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using FmsModel.ModelEnvironment;
 
 namespace FmsModel
 {
@@ -13,5 +14,11 @@ namespace FmsModel
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            var fms = new TestFms();
+            fms.Start();
+        }
     }
 }
