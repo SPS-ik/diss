@@ -35,8 +35,10 @@ namespace FmsModel.Dispatchering
                 {
                     blankProduct.CurrentLocation = FMS.Warehouse;
 
-                    var task = new Task((() => ProcessProduct(blankProduct)));
-                    task.Start();
+                    blankProduct.Status = ProductStatus.InProgress;
+
+                    Task.Factory.StartNew(() => ProcessProduct(blankProduct)).
+                        ContinueWith((res) => { blankProduct.Status = ProductStatus.Ready; });
 
                 }
             }
@@ -44,7 +46,6 @@ namespace FmsModel.Dispatchering
 
         private void ProcessProduct(Product product)
         {
-            product.Status = ProductStatus.InProgress;
             foreach (var technicalOperation in product.TechnicalOperations)
             {
                 FMC fmc = _fmcManager.AddToQuee(technicalOperation);
@@ -53,7 +54,6 @@ namespace FmsModel.Dispatchering
 
                 fmc.Process();
             }
-            product.Status = ProductStatus.Ready;
         }
 
         private void TransportProduct(Product product, ILocation location)
