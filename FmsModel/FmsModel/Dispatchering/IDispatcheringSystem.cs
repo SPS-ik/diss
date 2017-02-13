@@ -7,6 +7,6 @@ namespace FmsModel.Dispatchering
     {
         List<Product> Products { get; set; }
         FMS FMS { get; set; }
-        void Start(FMS fms, List<Product> products);
+        void Start();
     }
 }

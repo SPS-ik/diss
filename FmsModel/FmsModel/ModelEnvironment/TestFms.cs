@@ -38,51 +38,41 @@ namespace FmsModel.ModelEnvironment
             var product1 = new Product(1,
                 new List<TechnicalOperation>
                 {
-                    new TechnicalOperation(1, TechnicalOperationTypes.Type1, 10),
-                    new TechnicalOperation(2, TechnicalOperationTypes.Type2, 9),
+                    new TechnicalOperation(1, TechnicalOperationTypes.Type1, 4),
+                    new TechnicalOperation(2, TechnicalOperationTypes.Type2, 6),
                     new TechnicalOperation(3, TechnicalOperationTypes.Type3, 8),
-                    new TechnicalOperation(4, TechnicalOperationTypes.Type4, 7),
+                    new TechnicalOperation(4, TechnicalOperationTypes.Type4, 4),
                 });
 
             var product2 = new Product(2,
                 new List<TechnicalOperation>
                 {
                     new TechnicalOperation(1, TechnicalOperationTypes.Type2, 4),
-                    new TechnicalOperation(2, TechnicalOperationTypes.Type3, 5),
+                    new TechnicalOperation(2, TechnicalOperationTypes.Type3, 2),
                     new TechnicalOperation(3, TechnicalOperationTypes.Type4, 6),
-                    new TechnicalOperation(4, TechnicalOperationTypes.Type1, 7),
+                    new TechnicalOperation(4, TechnicalOperationTypes.Type1, 8),
                 });
 
             var product3 = new Product(3,
                 new List<TechnicalOperation>
                 {
-                    new TechnicalOperation(1, TechnicalOperationTypes.Type3, 5),
+                    new TechnicalOperation(1, TechnicalOperationTypes.Type3, 2),
                     new TechnicalOperation(2, TechnicalOperationTypes.Type4, 6),
-                    new TechnicalOperation(3, TechnicalOperationTypes.Type1, 7),
+                    new TechnicalOperation(3, TechnicalOperationTypes.Type1, 4),
                     new TechnicalOperation(4, TechnicalOperationTypes.Type2, 8),
-                });
-
-            var product4 = new Product(4,
-                new List<TechnicalOperation>
-                {
-                    new TechnicalOperation(1, TechnicalOperationTypes.Type4, 6),
-                    new TechnicalOperation(2, TechnicalOperationTypes.Type1, 7),
-                    new TechnicalOperation(3, TechnicalOperationTypes.Type2, 8),
-                    new TechnicalOperation(4, TechnicalOperationTypes.Type3, 9),
                 });
             
             var plan = new List<Product>()
             {
                 product1,
                 product2,
-                product3,
-                product4
+                product3
             };
 
             InitFMS();
 
-            var dispatcher = new RuleBasedDispatchingSystem();
-            dispatcher.Start(_fms, plan);
+            var dispatcher = new DiscreteDispatchingSystem(_fms, plan);
+            dispatcher.Start();
         }
     }
 }

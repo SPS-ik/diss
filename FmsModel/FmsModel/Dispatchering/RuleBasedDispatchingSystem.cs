@@ -14,18 +14,17 @@ namespace FmsModel.Dispatchering
         public List<Product> Products { get; set; }
         public FMS FMS { get; set; }
 
-        public void Start(FMS fms, List<Product> products)
+        public RuleBasedDispatchingSystem(FMS fms, List<Product> products)
         {
             Products = products;
             FMS = fms;
 
             _fmcManager = new FMCManager(FMS.Cells);
-            _agvManager = new AGVManager(FMS.Vehicles);
-
-            StartProcessing();
+            _agvManager = new AGVManager(FMS);
+           
         }
 
-        private void StartProcessing()
+        public void Start()
         {
             while (Products.Any(p => p.Status==ProductStatus.Blank))
             {
@@ -48,22 +47,17 @@ namespace FmsModel.Dispatchering
         {
             foreach (var technicalOperation in product.TechnicalOperations)
             {
-                FMC fmc = _fmcManager.AddToQuee(technicalOperation);
+                //FMC fmc = _fmcManager.AddToQuee(technicalOperation);
 
-                TransportProduct(product, fmc);
+                //TransportProduct(product, fmc);
 
-                fmc.Process();
+                //fmc.Process();
             }
         }
 
         private void TransportProduct(Product product, ILocation location)
         {
             AGV agv = null;
-            while (agv == null)
-            {
-                agv = _agvManager.GetIdleAgv();
-                Thread.Sleep(1);
-            }
             
             agv.Transport(product, location, 10);
         }

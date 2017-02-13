@@ -12,7 +12,9 @@ namespace FmsModel.Manufacturing
 
         public ResourceStatus Status { get; set; }
 
-        public List<TechnicalOperation> TechnicalOperations = new List<TechnicalOperation>();
+        public Product CurrentProduct { get; set; }
+
+        public List<Product> Products = new List<Product>();
 
         public FMC(int id, TechnicalOperationTypes type, ResourceStatus status = ResourceStatus.Idle)
         {
@@ -21,20 +23,14 @@ namespace FmsModel.Manufacturing
             Status = status;
         }
 
-        public void AddToQuee(TechnicalOperation technicalOperation)
+        public void AddToQuee(Product product)
         {
-            TechnicalOperations.Add(technicalOperation);
+            Products.Add(product);
         }
 
-        public void Process()
+        public void Process(Product product)
         {
-            Status = ResourceStatus.Busy;
-            var operation = TechnicalOperations[TechnicalOperations.Count - 1];
-
-            Thread.Sleep(operation.Duration*100);
-
-            TechnicalOperations.Remove(operation);
-            Status = ResourceStatus.Idle;
+            CurrentProduct = product;
         }
     }
 }

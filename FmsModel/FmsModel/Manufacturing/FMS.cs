@@ -24,5 +24,10 @@ namespace FmsModel.Manufacturing
             Vehicles = vehicles;
             Warehouse = warehouse;
         }
+
+        public int GetDuration(ILocation start, ILocation final)
+        {
+            return 2;
+        }
     }
 }
